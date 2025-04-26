@@ -3375,18 +3375,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Nasty Plot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Nasty Plot",
+          "Psystrike",
+          "Grass Knot/Flamethrower",
+          "Taunt/Earth Power/Grass Knot"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots/Leftovers/Life Orb",
+        "ability": "Pressure",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Steel"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Psystrike",
+          "Ice Beam",
+          "Flamethrower",
+          "Grass Knot"
+        ],
+        "item": "Choice Specs",
+        "ability": "Pressure",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Fire"
       }
     ]
   },
@@ -5696,18 +5710,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Sacred Fire",
+          "Brave Bird",
+          "Whirlwind/Earthquake",
+          "Recover"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Regenerator",
+        "nature": "Impish",
+        "evs": "248 HP / 252 Def / 8 SpD",
+        "tera_type": "Fairy/Ground/Grass"
+      },
+      {
+        "name": "Offensive",
+        "moveslots": [
+          "Sacred Fire",
+          "Brave Bird",
+          "Earthquake/Substitute",
+          "Recover"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Regenerator",
+        "nature": "Adamant/Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Ground/Flying"
       }
     ]
   },
@@ -8623,18 +8651,46 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Calm Mind",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Calm Mind",
+          "Origin Pulse",
+          "Ice Beam",
+          "Thunder/Thunder Wave"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Drizzle",
+        "nature": "Bold",
+        "evs": "248 HP / 164 Def / 80 SpA / 16 Spe (0 Atk IVs)",
+        "tera_type": "Poison/Fairy"
+      },
+      {
+        "name": "Choice Scarf",
+        "moveslots": [
+          "Water Spout",
+          "Origin Pulse",
+          "Ice Beam",
+          "Thunder"
+        ],
+        "item": "Choice Scarf",
+        "ability": "Drizzle",
+        "nature": "Timid",
+        "evs": "4 Def / 252 SpA / 252 Spe (0 Atk IVs)",
+        "tera_type": "Water"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Water Spout",
+          "Ice Beam",
+          "Thunder",
+          "Origin Pulse"
+        ],
+        "item": "Choice Specs",
+        "ability": "Drizzle",
+        "nature": "Modest/Timid",
+        "evs": "4 HP / 252 SpA / 252 Spe (0 Atk IVs)",
+        "tera_type": "Fairy/Ground"
       }
     ]
   },
@@ -8659,18 +8715,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Spikes",
+          "Precipice Blades/Earthquake",
+          "Stealth Rock/Protect",
+          "Will-O-Wisp/Roar"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers",
+        "ability": "Drought",
+        "nature": "Impish",
+        "evs": "240 HP / 252 Def / 16 Spe",
+        "tera_type": "Fairy/Water"
+      },
+      {
+        "name": "Swords Dance",
+        "moveslots": [
+          "Swords Dance",
+          "Precipice Blades",
+          "Stone Edge",
+          "Substitute/Heat Crash"
+        ],
+        "item": "Leftovers",
+        "ability": "Drought",
+        "nature": "Adamant",
+        "evs": "212 HP / 252 Atk / 44 Spe",
+        "tera_type": "Fairy/Ground/Fire"
       }
     ]
   },
@@ -8696,18 +8766,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Dragon Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Dragon Dance",
+          "Dragon Ascent",
+          "Earthquake",
+          "Extreme Speed"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Life Orb/Focus Sash",
+        "ability": "Air Lock",
+        "nature": "Jolly/Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Flying/Normal/Ground/Steel"
+      },
+      {
+        "name": "Swords Dance",
+        "moveslots": [
+          "Swords Dance",
+          "Dragon Ascent",
+          "Earthquake",
+          "Extreme Speed"
+        ],
+        "item": "Life Orb",
+        "ability": "Air Lock",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Normal"
       }
     ]
   },
@@ -10948,18 +11032,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Substitute",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Substitute",
+          "Spacial Rend",
+          "Earth Power/Fire Blast",
+          "Dragon Tail"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers",
+        "ability": "Pressure",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Ground/Steel"
       }
     ]
   },
@@ -14498,18 +14582,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Quiver Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Quiver Dance",
+          "Flamethrower",
+          "Morning Sun",
+          "Will-O-Wisp/Tera Blast"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Flame Body",
+        "nature": "Timid",
+        "evs": "80 HP / 252 Def / 176 Spe (0 Atk IVs)",
+        "tera_type": "Water/Fairy"
       }
     ]
   },
@@ -14678,18 +14762,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Dragon Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Dragon Dance",
+          "Bolt Strike",
+          "Dragon Claw",
+          "Substitute"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers",
+        "ability": "Teravolt",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Flying"
+      },
+      {
+        "name": "Mixed Dragon Dance",
+        "moveslots": [
+          "Dragon Dance",
+          "Bolt Strike",
+          "Dragon Claw",
+          "Draco Meteor"
+        ],
+        "item": "Life Orb",
+        "ability": "Teravolt",
+        "nature": "Naive",
+        "evs": "252 Atk / 4 SpA / 252 Spe",
+        "tera_type": "Dragon"
       }
     ]
   },
@@ -14716,18 +14814,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Wallbreaker",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Earth Power",
+          "Focus Blast",
+          "Psychic/Sludge Bomb/Sludge Wave",
+          "Nasty Plot/Stealth Rock"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Life Orb",
+        "ability": "Sheer Force",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Ground"
       }
     ]
   },
@@ -18047,18 +18145,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Agility",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Agility",
+          "Moongeist Beam",
+          "Focus Blast/Moonblast",
+          "Meteor Beam"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Power Herb",
+        "ability": "Shadow Shield",
+        "nature": "Timid",
+        "evs": "56 HP / 252 SpA / 200 Spe (0 Atk IVs)",
+        "tera_type": "Ghost/Fighting/Fairy"
       }
     ]
   },
@@ -18250,18 +18348,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Double Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Iron Defense/Shift Gear",
+          "Calm Mind",
+          "Draining Kiss",
+          "Stored Power"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers/Weakness Policy",
+        "ability": "Soul-Heart",
+        "nature": "Bold",
+        "evs": "248 HP / 252 Def / 8 SpD",
+        "tera_type": "Water"
+      },
+      {
+        "name": "Trick Room Setter",
+        "moveslots": [
+          "Fleur Cannon",
+          "Trick Room",
+          "Spikes",
+          "Volt Switch"
+        ],
+        "item": "Leftovers/Eject Pack/Shuca Berry",
+        "ability": "Soul-Heart",
+        "nature": "Relaxed",
+        "evs": "248 HP / 252 Def / 8 SpA",
+        "tera_type": "Water/Ground"
       }
     ]
   },
@@ -20224,18 +20336,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Band Wallbreaker",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Play Rough",
+          "Crunch/Tera Blast",
+          "Wild Charge",
+          "Close Combat"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Band",
+        "ability": "Intrepid Sword",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Dark/Ground/Fairy"
       }
     ]
   },
@@ -20354,18 +20466,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Band",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Wicked Blow",
+          "Close Combat",
+          "Sucker Punch",
+          "U-turn"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Band",
+        "ability": "Unseen Fist",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Dark/Fighting"
+      },
+      {
+        "name": "Swords Dance",
+        "moveslots": [
+          "Wicked Blow",
+          "Close Combat",
+          "Sucker Punch",
+          "Swords Dance"
+        ],
+        "item": "Black Glasses/Life Orb",
+        "ability": "Unseen Fist",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Dark/Fighting"
       }
     ]
   },
@@ -20427,18 +20553,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Dual Screens",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Reflect",
+          "Light Screen",
+          "Explosion/Volt Switch",
+          "Rapid Spin"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Light Clay",
+        "ability": "Transistor",
+        "nature": "Jolly/Timid",
+        "evs": "252 HP / 4 Def / 252 Spe",
+        "tera_type": "Dark/Flying"
       }
     ]
   },
@@ -20503,18 +20629,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Nasty Plot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Nasty Plot",
+          "Substitute/Taunt",
+          "Shadow Ball",
+          "Draining Kiss/Tera Blast"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers/Spell Tag",
+        "ability": "Grim Neigh",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Fairy/Fighting/Ghost"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Shadow Ball",
+          "Tera Blast",
+          "Will-O-Wisp",
+          "Dark Pulse"
+        ],
+        "item": "Choice Specs",
+        "ability": "Grim Neigh",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Fairy/Fighting"
       }
     ]
   },
@@ -22839,18 +22979,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Heavy-Duty Boots",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Freeze-Dry",
+          "Hydro Pump",
+          "Ice Beam",
+          "Taunt/Encore"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Ghost/Ice"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Hydro Pump",
+          "Freeze-Dry",
+          "Flip Turn",
+          "Ice Beam"
+        ],
+        "item": "Choice Specs",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Ice/Water"
       }
     ]
   },
@@ -23305,18 +23459,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Dragon Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Dragon Dance",
+          "Acrobatics",
+          "Crunch/Jaw Lock",
+          "Roost/Earthquake/Taunt"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Booster Energy",
+        "ability": "Protosynthesis",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Flying"
+      },
+      {
+        "name": "Full Moon (Choice Band)",
+        "moveslots": [
+          "Crunch",
+          "U-turn",
+          "Earthquake/Iron Head",
+          "Dragon Claw"
+        ],
+        "item": "Choice Band",
+        "ability": "Protosynthesis",
+        "nature": "Jolly",
+        "evs": "220 Atk / 36 SpD / 252 Spe",
+        "tera_type": "Dark/Steel/Fairy"
       }
     ]
   },
@@ -23379,18 +23547,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Scarf",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Low Kick/Close Combat",
+          "Outrage/Dragon Claw",
+          "U-turn",
+          "Flare Blitz"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Scarf",
+        "ability": "Orichalcum Pulse",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Ghost/Fire"
+      },
+      {
+        "name": "Scale Shot",
+        "moveslots": [
+          "Scale Shot",
+          "Low Kick/Close Combat",
+          "Swords Dance",
+          "Flare Blitz"
+        ],
+        "item": "Loaded Dice",
+        "ability": "Orichalcum Pulse",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Fire/Ghost"
       }
     ]
   },
@@ -24065,18 +24247,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Scarf",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Seed Flare",
+          "Air Slash",
+          "Earth Power",
+          "Healing Wish"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Scarf",
+        "ability": "Serene Grace",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Flying"
+      },
+      {
+        "name": "SubSeed",
+        "moveslots": [
+          "Substitute",
+          "Seed Flare",
+          "Air Slash",
+          "Leech Seed/Earth Power"
+        ],
+        "item": "Leftovers",
+        "ability": "Serene Grace",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Steel"
       }
     ]
   },
@@ -24509,18 +24705,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Dragon Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Dragon Dance",
+          "Fusion Bolt",
+          "Icicle Spear",
+          "Scale Shot/Substitute"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Loaded Dice",
+        "ability": "Teravolt",
+        "nature": "Jolly/Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Electric"
       }
     ]
   },
@@ -27374,18 +27570,74 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive Dragon Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Dragon Dance",
+          "Sunsteel Strike/Photon Geyser",
+          "Knock Off/Earthquake",
+          "Morning Sun"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Prism Armor",
+        "nature": "Impish",
+        "evs": "252 HP / 204 Def / 52 Spe",
+        "tera_type": "Fire"
+      },
+      {
+        "name": "Offensive Dragon Dance",
+        "moveslots": [
+          "Dragon Dance",
+          "Sunsteel Strike",
+          "Earthquake",
+          "Stone Edge/Photon Geyser"
+        ],
+        "item": "Lum Berry/Occa Berry/Life Orb",
+        "ability": "Prism Armor",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Fire/Psychic"
+      },
+      {
+        "name": "Trick Room",
+        "moveslots": [
+          "Trick Room",
+          "Swords Dance",
+          "Photon Geyser",
+          "Earthquake"
+        ],
+        "item": "Lum Berry/Life Orb/Weakness Policy/Mental Herb",
+        "ability": "Prism Armor",
+        "nature": "Brave",
+        "evs": "252 HP / 252 Atk / 4 Def (0 Spe IVs)",
+        "tera_type": "Fire"
+      },
+      {
+        "name": "Defensive",
+        "moveslots": [
+          "Sunsteel Strike",
+          "Earthquake",
+          "Morning Sun",
+          "Swords Dance/Stealth Rock/Knock Off"
+        ],
+        "item": "Heavy-Duty Boots/Covert Cloak",
+        "ability": "Prism Armor",
+        "nature": "Impish",
+        "evs": "252 HP / 4 Atk / 252 Def",
+        "tera_type": "Ground"
+      },
+      {
+        "name": "Stored Power",
+        "moveslots": [
+          "Iron Defense",
+          "Calm Mind",
+          "Morning Sun",
+          "Stored Power"
+        ],
+        "item": "Leftovers",
+        "ability": "Prism Armor",
+        "nature": "Bold",
+        "evs": "248 HP / 120 Def / 140 SpD",
+        "tera_type": "Poison/Water"
       }
     ]
   },
@@ -28121,18 +28373,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Ultimutt",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Swords Dance",
+          "Behemoth Blade/Play Rough",
+          "Close Combat/Crunch",
+          "Wild Charge"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Rusted Sword",
+        "ability": "Intrepid Sword",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Fighting/Flying/Electric/Fire"
       }
     ]
   },
@@ -28158,18 +28410,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "IronPress",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Body Press",
+          "Iron Defense",
+          "Rest",
+          "Substitute"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Rusted Shield",
+        "ability": "Dauntless Shield",
+        "nature": "Jolly",
+        "evs": "252 HP / 4 Def / 252 Spe",
+        "tera_type": "Fire/Dark/Steel"
       }
     ]
   },
@@ -28216,18 +28468,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Band",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Surging Strikes",
+          "Close Combat",
+          "Poison Jab/Aqua Jet",
+          "U-turn"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Band",
+        "ability": "Unseen Fist",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Water/Fighting"
       }
     ]
   },
@@ -29529,18 +29781,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Wallbreaker",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Hydro Pump",
+          "Fire Blast",
+          "Draco Meteor/Spacial Rend",
+          "Substitute/Dragon Tail/Earth Power/Spacial Rend"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Lustrous Globe",
+        "ability": "Pressure",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Fairy/Ground"
       }
     ]
   },
@@ -29767,18 +30019,32 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Band",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Jet Punch",
+          "Flip Turn",
+          "Wave Crash/Close Combat",
+          "Zen Headbutt/Ice Punch"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Band",
+        "ability": "Zero to Hero",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Water"
+      },
+      {
+        "name": "Bulk Up",
+        "moveslots": [
+          "Jet Punch",
+          "Bulk Up",
+          "Drain Punch",
+          "Taunt"
+        ],
+        "item": "Leftovers",
+        "ability": "Zero to Hero",
+        "nature": "Careful",
+        "evs": "248 HP / 8 Atk / 252 SpD",
+        "tera_type": "Fairy"
       }
     ]
   },
@@ -30136,18 +30402,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Bear",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Calm Mind",
+          "Blood Moon",
+          "Hyper Voice/Moonlight",
+          "Earth Power/Moonlight"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers",
+        "ability": "Mind's Eye",
+        "nature": "Modest",
+        "evs": "4 Def / 252 SpA / 252 Spe",
+        "tera_type": "Normal"
       }
     ]
   },
@@ -30210,18 +30476,18 @@
     "Tier": "Uber",
     "strategies": [
       {
-        "name": "",
+        "name": "Swords Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Swords Dance",
+          "Ivy Cudgel",
+          "Power Whip/Horn Leech",
+          "Trailblaze/Stomping Tantrum/Play Rough"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Hearthflame Mask",
+        "ability": "Mold Breaker/Embody Aspect",
+        "nature": "Jolly/Adamant",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Fire"
       }
     ]
   },

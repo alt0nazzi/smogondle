@@ -12,8 +12,35 @@ with open("all_pokemon_with_tiers.json", "r", encoding="utf-8") as f:
 
 TIER_OPTIONS = sorted(set(p["Tier"] for p in all_pokemon if p["Tier"] != "Unranked"))
 
+def calculate_points():
+    hint_index = session.get("hint_index", 0)
+    revealed_hints = hint_index
+
+    # Base points depending on number of hints used
+    if revealed_hints == 0:
+        base_points = 100
+    elif revealed_hints == 1:
+        base_points = 80
+    elif revealed_hints == 2:
+        base_points = 60
+    elif revealed_hints == 3:
+        base_points = 40
+    elif revealed_hints == 4:
+        base_points = 20
+    else:
+        base_points = 10
+
+    # BONUS: Strategy hint usually appears around 3rd or 4th hint
+    # If user guessed BEFORE reaching Strategy hint (hint 4)
+    if revealed_hints < 4:
+        multiplier = 1.5
+    else:
+        multiplier = 1
+
+    return int(base_points * multiplier)
+
 def get_type_icons(types):
-    return [(t, url_for("static", filename=f"type-icons/{t.lower()}.png")) for t in types]
+    return [{"name": t, "url": f"/static/type-icons/{t.lower()}.png"} for t in types]
 
 def get_hints(pokemon, hint_index):
     type_icons = get_type_icons(pokemon["types"])
@@ -93,45 +120,68 @@ def get_hints(pokemon, hint_index):
 def index():
     return redirect(url_for("game"))
 
-@app.route("/game", methods=["GET", "POST"])
+@app.route("/game")
 def game():
-    if request.method == "POST":
-        session["tiers"] = request.form.getlist("tiers")
-        pick_new_pokemon()
-        return redirect(url_for("game"))
-
     if "pokemon" not in session:
         pick_new_pokemon()
-
     pokemon = session["pokemon"]
-    hints = get_hints(pokemon, session.get("hint_index", 0))
+
+    score = session.get("score", 0)
+    rounds = session.get("rounds", 0)
+    revealed = session.get("revealed", False)
+    selected_tiers = session.get("tiers", [])
+    hint_index = session.get("hint_index", 0)
+    last_correct = session.get("last_correct", False)
+    guess_wrong = session.pop("guess_wrong", False)
+    bonus_multiplier = session.pop("bonus_multiplier", False)
+    points_earned = session.pop("points_earned", 0)
+    intro_animation = False
+
+    if "intro_seen" not in session:
+        session["intro_seen"] = True
+        intro_animation = True
+
+    fade_in = session.pop("fade_in", False)  # Grab and remove fade_in flag
+
+    hints = get_hints(pokemon, hint_index)
 
     return render_template(
         "game.html",
         hints=hints,
-        score=session.get("score", 0),
-        rounds=session.get("rounds", 0),
-        image_revealed=session.get("revealed", False),
+        score=score,
+        rounds=rounds,
+        image_revealed=revealed,
         image_url=pokemon["sprite_url"],
         tiers=TIER_OPTIONS,
-        selected_tiers=session.get("tiers", []),
-        hint_index=session.get("hint_index", 0)
+        selected_tiers=selected_tiers,
+        hint_index=hint_index,
+        last_correct=last_correct,
+        guess_wrong=guess_wrong,
+        bonus_multiplier=bonus_multiplier,
+        intro_animation=intro_animation,
+        points_earned=points_earned,
+        fade_in=fade_in  # Pass to template
     )
 
 @app.route("/guess", methods=["POST"])
 def guess():
-    user_guess = request.form["guess"].strip().lower()
-    pokemon = session["pokemon"]
-    correct = user_guess == pokemon["name"].lower()
-
-    if correct and not session.get("revealed", False):
+    guess = request.form["guess"].strip().lower()
+    pokemon = session.get("pokemon")
+    correct_answer = pokemon["name"].lower()
+    if guess == correct_answer:
         session["revealed"] = True
-        session["score"] = session.get("score", 0) + max(6 - session.get("hint_index", 0), 1)
+        earned_points = calculate_points()
+        session["score"] = session.get("score", 0) + earned_points
         session["rounds"] = session.get("rounds", 0) + 1
-    elif not correct:
+        session["last_correct"] = True
+        session["points_earned"] = earned_points
+        session["guess_wrong"] = False
+        session["bonus_multiplier"] = (earned_points > 100)  # True if x1.5 was applied
+    else:
         session["hint_index"] = session.get("hint_index", 0) + 1
-
+        session["guess_wrong"] = True
     return redirect(url_for("game"))
+
 
 @app.route("/next")
 def next_pokemon():
@@ -164,6 +214,22 @@ def pick_new_pokemon():
 def giveup():
     session["revealed"] = True
     session["rounds"] = session.get("rounds", 0) + 1
+    return redirect(url_for("game"))
+
+@app.route("/restart", methods=["POST"])
+def restart():
+    session.clear()
+    return redirect(url_for("game"))
+
+@app.route("/update_tiers", methods=["POST"])
+def update_tiers():
+    selected = request.form.getlist("tiers")
+    if selected:
+        session["tiers"] = selected
+    else:
+        session["tiers"] = ["OU"]  # Default fallback if none selected
+    pick_new_pokemon()  # Immediately pick a new Pokémon from new tiers
+    session["fade_in"] = True  # Set fade-in trigger
     return redirect(url_for("game"))
 
 if __name__ == "__main__":
