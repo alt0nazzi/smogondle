@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-900 text-white">
+<head>
+  <meta charset="UTF-8">
+  <title>Smogondle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    async function updateSuggestions(value) {
+      const res = await fetch(`/autocomplete?q=${value}`);
+      const names = await res.json();
+      const datalist = document.getElementById("pokemon-list");
+      datalist.innerHTML = "";
+      names.forEach(name => {
+        const option = document.createElement("option");
+        option.value = name;
+        datalist.appendChild(option);
+      });
+    }
+  </script>
+  <style>
+    @keyframes pop-in {0% {opacity: 0; transform: scale(0.8) translateY(10px);} 100% {opacity: 1; transform: scale(1) translateY(0);}}
+@keyframes bounce-flip {0% {transform: rotateY(0deg) scale(1);} 50% {transform: rotateY(90deg) scale(1.2);} 100% {transform: rotateY(180deg) scale(1);}}
+
+@keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.4s ease-out forwards;
+    }
+    .type-icon {
+      height: 32px;
+      width: 32px;
+      border-radius: 9999px;
+      margin-right: 8px;
+      border: 2px solid #555;
+      background: #1f2937;
+    }
+    .perspective {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+  animation: bounce-flip 0.8s ease-out forwards;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 0.75rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6 relative">
+  <div id="particles-js" class="absolute inset-0 -z-10"></div>
+
+  <div class="bg-gray-800 shadow-2xl rounded-2xl p-8 w-full max-w-2xl relative z-10">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl font-bold text-indigo-400">Smogondle</h1>
+    </div>
+
+    <form method="POST" class="flex flex-wrap gap-2 mb-6">
+      {% for tier in tiers %}
+        <label class="flex items-center gap-1 text-sm text-white">
+          <input type="checkbox" name="tiers" value="{{ tier }}" {% if tier in selected_tiers %}checked{% endif %} onchange="this.form.submit()" class="accent-indigo-500">
+          <span>{{ tier }}</span>
+        </label>
+      {% endfor %}
+    </form>
+
+    <form method="POST" action="/guess" class="flex gap-2 mb-6">
+      <input type="text" name="guess" id="guess-input" list="pokemon-list" placeholder="Enter Pokémon..." oninput="updateSuggestions(this.value)" required autocomplete="off" class="flex-1 p-3 rounded-xl border border-gray-700 bg-gray-700 text-white">
+      <datalist id="pokemon-list"></datalist>
+      <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700">Guess</button>
+      {% if hint_index >= (hints|length - 1) and not image_revealed %}
+      <a href="/giveup" class="px-6 py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 ml-2">Give up?</a>
+      {% endif %}
+    </form>
+
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Hints:</h2>
+      <ul class="space-y-3">
+        {% for hint in hints %}
+  {% set delay = loop.index0 * 0.1 %}
+          <li class="bg-gray-700 p-3 rounded-lg flex flex-col animate-fade-in" style="animation-delay: {{ delay }}s">
+            <strong class="mb-2">{{ hint.label }}:</strong>
+            {% if hint.types %}
+              <div class="flex flex-wrap">
+              {% for t, icon in hint.types %}
+                <img src="{{ url_for('static', filename='type-icons/' + t.lower() + '.png') }}" alt="{{ t }}" title="{{ t }}" class="type-icon">
+              {% endfor %}
+              </div>
+
+{% elif hint.html %}
+<div class="p-3 rounded-md text-sm animate-pop-in hover-glow {{ hint.tier_class }}" style="line-height: 1.5;">
+  {{ hint.html|safe }}
+</div>
+{% elif hint.text %}
+<span>{{ hint.text|safe }}</span>
+
+{% elif hint.html %}
+<div class="p-3 rounded-md text-sm animate-pop-in hover-glow {{ hint.tier_class }}" style="line-height: 1.5;">
+  {{ hint.html|safe }}
+</div>
+{% elif hint.text %}
+<span>{{ hint.text|safe }}</span>
+            {% elif hint.text %}
+              <span>{{ hint.text|safe }}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="mb-6">
+      <p><strong>Score:</strong> {{ score }}</p>
+      <p><strong>Rounds:</strong> {{ rounds }}</p>
+    </div>
+
+    {% if image_revealed %}
+    <div class="text-center mb-6">
+      <h3 class="text-green-400 text-2xl font-bold mb-2">Correct!</h3>
+      <div class="relative w-40 h-40 mx-auto perspective mb-4">
+        <div class="flip-card-inner">
+          <div class="flip-card-front bg-gray-600 rounded-xl shadow"></div>
+          <div class="flip-card-back bg-gray-200 rounded-xl shadow flex items-center justify-center">
+            <img src="{{ image_url }}" alt="Pokemon Sprite" class="w-28 h-28 object-contain">
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-4">
+        <a href="/next" class="px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700">Next Pokémon</a>
+        <a href="/reset" class="px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700">Start Over</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 40 },
+        color: { value: "#888" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        move: { enable: true, speed: 0.5 }
+      },
+      interactivity: { detect_on: "canvas", events: { onhover: { enable: false } } },
+      retina_detect: true
+    });
+  </script>
+</body>
+</html>
