@@ -784,18 +784,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Utility",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Stealth Rock",
+          "Moonblast",
+          "Moonlight",
+          "Thunder Wave/Knock Off"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers/Sticky Barb/Rocky Helmet",
+        "ability": "Magic Guard",
+        "nature": "Bold",
+        "evs": "252 HP / 252 Def / 4 SpD",
+        "tera_type": "Water/Steel"
+      },
+      {
+        "name": "Calm Mind",
+        "moveslots": [
+          "Calm Mind",
+          "Moonblast",
+          "Moonlight",
+          "Knock Off/Flamethrower"
+        ],
+        "item": "Leftovers/Sticky Barb",
+        "ability": "Magic Guard",
+        "nature": "Bold",
+        "evs": "252 HP / 252 Def / 4 SpD (0 Atk IVs)",
+        "tera_type": "Fire/Water/Steel"
       }
     ]
   },
@@ -3220,18 +3234,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Hurricane",
+          "Volt Switch/U-turn",
+          "Thunder Wave/Discharge",
+          "Roost"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Static",
+        "nature": "Bold",
+        "evs": "248 HP / 244 Def / 16 Spe (0 Atk IVs)",
+        "tera_type": "Steel/Fairy/Water"
       }
     ]
   },
@@ -3258,18 +3272,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Flamethrower",
+          "Will-O-Wisp/Hurricane/Roar",
+          "Roar/U-turn",
+          "Roost"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Flame Body",
+        "nature": "Bold",
+        "evs": "248 HP / 248 Def / 12 Spe",
+        "tera_type": "Fairy/Grass"
       }
     ]
   },
@@ -3338,18 +3352,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Dragon Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Dragon Dance",
+          "Earthquake",
+          "Extreme Speed/Roost",
+          "Ice Spinner/Roost"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Multiscale",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Normal/Ground"
+      },
+      {
+        "name": "Bulky Attacker",
+        "moveslots": [
+          "Dragon Tail",
+          "Extreme Speed",
+          "Earthquake",
+          "Roost"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Multiscale",
+        "nature": "Adamant",
+        "evs": "252 HP / 240 Atk / 16 Spe",
+        "tera_type": "Normal"
+      },
+      {
+        "name": "Choice Band",
+        "moveslots": [
+          "Outrage",
+          "Extreme Speed",
+          "Ice Spinner",
+          "Fire Punch/Earthquake"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Multitype",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Normal"
       }
     ]
   },
@@ -10482,18 +10524,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Boots Attacker",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Triple Axel",
+          "Knock Off",
+          "Ice Shard",
+          "Swords Dance/Low Kick"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Pressure",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Ice/Ghost"
+      },
+      {
+        "name": "Choice Band",
+        "moveslots": [
+          "Triple Axel",
+          "Knock Off",
+          "Ice Shard",
+          "Low Kick/Beat Up"
+        ],
+        "item": "Choice Band",
+        "ability": "Pressure",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Ice/Dark"
       }
     ]
   },
@@ -10741,18 +10797,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Swords Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Swords Dance",
+          "Facade",
+          "Knock Off/Earthquake",
+          "Protect"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Toxic Orb",
+        "ability": "Poison Heal",
+        "nature": "Careful/Impish",
+        "evs": "244 HP / 248 Def / 16 SpD",
+        "tera_type": "Normal"
+      },
+      {
+        "name": "Spikes",
+        "moveslots": [
+          "Spikes",
+          "Earthquake/Knock Off",
+          "Toxic/Knock Off",
+          "Protect"
+        ],
+        "item": "Toxic Orb",
+        "ability": "Poison Heal",
+        "nature": "Careful/Impish",
+        "evs": "244 HP / 248 Def / 16 SpD",
+        "tera_type": "Water/Ghost"
       }
     ]
   },
@@ -11224,18 +11294,60 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Nasty Plot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Nasty Plot",
+          "Dark Pulse",
+          "Ice Beam/Focus Blast",
+          "Sludge Bomb/Focus Blast"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots/Leftovers/Expert Belt",
+        "ability": "Bad Dreams",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Poison/Ghost"
+      },
+      {
+        "name": "Choice Scarf",
+        "moveslots": [
+          "Dark Pulse",
+          "Sludge Bomb",
+          "Ice Beam",
+          "Trick"
+        ],
+        "item": "Choice Scarf",
+        "ability": "Bad Dreams",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Poison"
+      },
+      {
+        "name": "Boots Attacker",
+        "moveslots": [
+          "Dark Pulse",
+          "Ice Beam",
+          "Sludge Bomb/Knock Off/Nasty Plot",
+          "Will-O-Wisp/Knock Off"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Bad Dreams",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Poison"
+      },
+      {
+        "name": "All-Out Attacker",
+        "moveslots": [
+          "Dark Pulse",
+          "Sludge Bomb",
+          "Ice Beam",
+          "Focus Blast"
+        ],
+        "item": "Life Orb/Expert Belt",
+        "ability": "Bad Dreams",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Poison/Ghost"
       }
     ]
   },
@@ -13601,18 +13713,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "WishFish (Pivot)",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Scald",
+          "Flip Turn",
+          "Wish",
+          "Protect"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots/Rocky Helmet",
+        "ability": "Regenerator",
+        "nature": "Relaxed",
+        "evs": "252 HP / 252 Def / 4 SpD (0 Atk IVs)",
+        "tera_type": "Ghost/Flying"
+      },
+      {
+        "name": "Assault Vest",
+        "moveslots": [
+          "Flip Turn",
+          "Scald",
+          "Play Rough",
+          "Mirror Coat"
+        ],
+        "item": "Assault Vest",
+        "ability": "Regenerator",
+        "nature": "Sassy",
+        "evs": "20 HP / 236 Def / 252 SpD",
+        "tera_type": "Fairy"
       }
     ]
   },
@@ -14851,18 +14977,74 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Specs",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Ice Beam",
+          "Freeze-Dry",
+          "Draco Meteor",
+          "Earth Power"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Specs",
+        "ability": "Pressure",
+        "nature": "Timid/Modest",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Ice/Ground/Fairy"
+      },
+      {
+        "name": "Boots Attacker",
+        "moveslots": [
+          "Ice Beam",
+          "Freeze-Dry",
+          "Earth Power",
+          "Draco Meteor"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Pressure",
+        "nature": "Timid/Modest",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Ice/Ground"
+      },
+      {
+        "name": "Physical Dragon Dance",
+        "moveslots": [
+          "Dragon Dance",
+          "Scale Shot",
+          "Icicle Spear",
+          "Tera Blast"
+        ],
+        "item": "Loaded Dice",
+        "ability": "Pressure",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Fire/Ground"
+      },
+      {
+        "name": "Mixed Dragon Dance",
+        "moveslots": [
+          "Dragon Dance",
+          "Icicle Spear",
+          "Freeze-Dry",
+          "Earth Power"
+        ],
+        "item": "Never-Melt Ice/Heavy-Duty Boots",
+        "ability": "Pressure",
+        "nature": "Hasty",
+        "evs": "168 Atk / 88 SpA / 252 Spe",
+        "tera_type": "Ice/Ground"
+      },
+      {
+        "name": "Substitute + Protect",
+        "moveslots": [
+          "Substitute",
+          "Protect",
+          "Freeze-Dry",
+          "Earth Power"
+        ],
+        "item": "Leftovers",
+        "ability": "Pressure",
+        "nature": "Timid",
+        "evs": "52 HP / 204 SpA / 252 Spe",
+        "tera_type": "Ground"
       }
     ]
   },
@@ -16728,18 +16910,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Assault Vest",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Surf",
+          "Moonblast",
+          "Flip Turn",
+          "Psychic Noise"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Assault Vest",
+        "ability": "Torrent",
+        "nature": "Modest",
+        "evs": "80 HP / 252 SpA / 176 Spe",
+        "tera_type": "Steel/Grass"
+      },
+      {
+        "name": "Offensive Calm Mind",
+        "moveslots": [
+          "Calm Mind",
+          "Surf/Hydro Pump",
+          "Moonblast",
+          "Substitute/Psychic Noise"
+        ],
+        "item": "Leftovers/Heavy-Duty Boots/Custap Berry",
+        "ability": "Torrent",
+        "nature": "Modest",
+        "evs": "80 HP / 252 SpA / 176 Spe (0 Atk IVs)",
+        "tera_type": "Steel/Ghost"
+      },
+      {
+        "name": "Bulky Calm Mind",
+        "moveslots": [
+          "Calm Mind",
+          "Psychic Noise/Surf",
+          "Draining Kiss",
+          "Substitute"
+        ],
+        "item": "Leftovers",
+        "ability": "Liquid Voice/Torrent",
+        "nature": "Bold",
+        "evs": "252 HP / 248 Def / 8 SpD (0 Atk IVs)",
+        "tera_type": "Steel"
       }
     ]
   },
@@ -17245,18 +17455,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Sticky Web",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Sticky Web",
+          "Surf/Liquidation",
+          "Endeavor/Leech Life",
+          "Endure/Mirror Coat"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Custap Berry",
+        "ability": "Water Bubble",
+        "nature": "Adamant",
+        "evs": "252 HP / 216 Atk / 40 Def",
+        "tera_type": "Ghost"
       }
     ]
   },
@@ -18668,18 +18878,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Pivot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Pyro Ball",
+          "U-turn",
+          "Court Change",
+          "Will-O-Wisp/Sucker Punch/Gunk Shot"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Blaze/Libero",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Fire/Flying"
       }
     ]
   },
@@ -18856,18 +19066,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Physically Defensive",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Brave Bird/Body Press",
+          "Defog/Iron Defense",
+          "U-turn/Iron Defense",
+          "Roost"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers/Rocky Helmet",
+        "ability": "Pressure",
+        "nature": "Impish",
+        "evs": "248 HP / 252 Def / 8 SpD",
+        "tera_type": "Dragon/Water/Fighting"
       }
     ]
   },
@@ -19646,18 +19856,60 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Calm Mind",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Calm Mind",
+          "Draining Kiss",
+          "Psychic Noise/Psyshock",
+          "Mystical Fire/Nuzzle"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers",
+        "ability": "Magic Bounce",
+        "nature": "Bold",
+        "evs": "252 HP / 204 Def / 52 Spe",
+        "tera_type": "Water/Fire"
+      },
+      {
+        "name": "Healing Wish",
+        "moveslots": [
+          "Healing Wish",
+          "Psychic Noise",
+          "Dazzling Gleam",
+          "Nuzzle/Mystical Fire"
+        ],
+        "item": "Eject Button",
+        "ability": "Magic Bounce",
+        "nature": "Bold",
+        "evs": "252 HP / 124 Def / 132 Spe",
+        "tera_type": "Steel"
+      },
+      {
+        "name": "Assault Vest",
+        "moveslots": [
+          "Psyshock",
+          "Draining Kiss",
+          "Mystical Fire",
+          "Nuzzle/Future Sight/Psychic Noise"
+        ],
+        "item": "Assault Vest",
+        "ability": "Magic Bounce",
+        "nature": "Modest",
+        "evs": "252 HP / 128 SpA / 104 SpD / 24 Spe (0 Atk IVs)",
+        "tera_type": "Water/Steel"
+      },
+      {
+        "name": "Trick Room",
+        "moveslots": [
+          "Trick Room",
+          "Psychic Noise",
+          "Dazzling Gleam",
+          "Healing Wish"
+        ],
+        "item": "Focus Sash",
+        "ability": "Magic Bounce",
+        "nature": "Quiet",
+        "evs": "252 HP / 4 Def / 252 SpA (0 Atk + 0 Spe IVs)",
+        "tera_type": "Water/Steel"
       }
     ]
   },
@@ -20300,18 +20552,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Boots Pivot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Dragon Darts/Draco Meteor",
+          "Hex",
+          "Will-O-Wisp/Thunder Wave",
+          "U-turn"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Infiltrator",
+        "nature": "Naive/Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Fairy/Ghost"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Draco Meteor",
+          "Shadow Ball",
+          "Flamethrower",
+          "U-turn"
+        ],
+        "item": "Choice Specs",
+        "ability": "Infiltrator",
+        "nature": "Timid/Modest",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Ghost/Dragon"
+      },
+      {
+        "name": "Choice Band",
+        "moveslots": [
+          "Dragon Darts",
+          "Tera Blast",
+          "U-turn",
+          "Phantom Force/Sucker Punch"
+        ],
+        "item": "Choice Band",
+        "ability": "Clear Body",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Ghost"
       }
     ]
   },
@@ -20372,18 +20652,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "IronPress",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Iron Defense",
+          "Body Press",
+          "Crunch",
+          "Roar/Rest/Stone Edge"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers/Chesto Berry",
+        "ability": "Dauntless Shield",
+        "nature": "Jolly",
+        "evs": "252 Atk / 88 Def / 168 Spe",
+        "tera_type": "Fire/Dark/Steel"
+      },
+      {
+        "name": "Boots Attacker",
+        "moveslots": [
+          "Close Combat",
+          "Crunch",
+          "Stone Edge",
+          "Heavy Slam/Ice Fang/Rest"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Dauntless Shield",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Dark/Steel"
+      },
+      {
+        "name": "Offensive Attacker",
+        "moveslots": [
+          "Close Combat",
+          "Crunch",
+          "Stone Edge",
+          "Heavy Slam/Ice Fang"
+        ],
+        "item": "Life Orb/Expert Belt",
+        "ability": "Dauntless Shield",
+        "nature": "Jolly/Adamant",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Dark/Steel"
       }
     ]
   },
@@ -20840,18 +21148,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Choice Scarf",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Moonblast",
+          "Earth Power",
+          "Mystical Fire/Tera Blast",
+          "Healing Wish"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Choice Scarf",
+        "ability": "Contrary",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Ground/Fairy/Stellar"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Moonblast",
+          "Earth Power",
+          "Mystical Fire",
+          "Healing Wish/Draining Kiss"
+        ],
+        "item": "Choice Specs",
+        "ability": "Contrary",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Fairy/Ground"
+      },
+      {
+        "name": "Calm Mind",
+        "moveslots": [
+          "Calm Mind",
+          "Moonblast",
+          "Earth Power",
+          "Substitute/Taunt"
+        ],
+        "item": "Leftovers/Heavy-Duty Boots",
+        "ability": "Cute Charm",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Ground/Steel/Fairy"
       }
     ]
   },
@@ -21518,18 +21854,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Curse",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Curse",
+          "Salt Cure",
+          "Recover",
+          "Earthquake"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers",
+        "ability": "Purifying Salt",
+        "nature": "Careful",
+        "evs": "252 HP / 52 Def / 204 SpD",
+        "tera_type": "Water/Fairy"
+      },
+      {
+        "name": "Stealth Rock",
+        "moveslots": [
+          "Stealth Rock",
+          "Salt Cure",
+          "Recover",
+          "Protect/Ice Punch"
+        ],
+        "item": "Leftovers",
+        "ability": "Purifying Salt",
+        "nature": "Careful",
+        "evs": "252 HP / 52 Def / 204 SpD",
+        "tera_type": "Fairy/Water"
       }
     ]
   },
@@ -22106,18 +22456,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Utility",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Stealth Rock",
+          "Gigaton Hammer",
+          "Encore",
+          "Thunder Wave/Knock Off"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Air Balloon",
+        "ability": "Pickpocket/Mold Breaker",
+        "nature": "Jolly",
+        "evs": "252 HP / 24 SpD / 232 Spe",
+        "tera_type": "Water/Ghost"
       }
     ]
   },
@@ -22378,18 +22728,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Lead",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Stealth Rock",
+          "Mortal Spin",
+          "Power Gem",
+          "Earth Power"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Focus Sash/Red Card",
+        "ability": "Toxic Debris",
+        "nature": "Timid",
+        "evs": "4 Def / 252 SpA / 252 Spe",
+        "tera_type": "Ghost"
+      },
+      {
+        "name": "Offensive",
+        "moveslots": [
+          "Meteor Beam",
+          "Sludge Wave",
+          "Earth Power",
+          "Dazzling Gleam/Rock Polish/Power Gem"
+        ],
+        "item": "Power Herb",
+        "ability": "Toxic Debris",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Fairy/Grass/Flying"
       }
     ]
   },
@@ -22547,18 +22911,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Wall",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Waterfall/Body Press",
+          "Curse/Avalanche",
+          "Rest",
+          "Sleep Talk"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots/Leftovers",
+        "ability": "Unaware",
+        "nature": "Impish",
+        "evs": "252 HP / 252 Def / 4 SpD",
+        "tera_type": "Fighting/Dark/Grass"
       }
     ]
   },
@@ -22731,18 +23095,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Swords Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Swords Dance",
+          "Sucker Punch",
+          "Kowtow Cleave",
+          "Iron Head/Tera Blast"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers/Lum Berry/Black Glasses/Air Balloon",
+        "ability": "Supreme Overlord",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Ghost/Fairy/Dark"
       }
     ]
   },
@@ -22768,18 +23132,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Offensive Utility",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Headlong Rush",
+          "Ice Spinner",
+          "Rapid Spin",
+          "Stealth Rock/Knock Off/Close Combat"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Rocky Helmet/Heavy-Duy Boots",
+        "ability": "Protosynthesis",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Steel/Ground/Fire"
+      },
+      {
+        "name": "Defensive",
+        "moveslots": [
+          "Headlong Rush",
+          "Ice Spinner",
+          "Rapid Spin",
+          "Knock Off/Stealth Rock"
+        ],
+        "item": "Rocky Helmet/Leftovers/Heavy-Duy Boots",
+        "ability": "Protosynthesis",
+        "nature": "Jolly",
+        "evs": "252 HP / 4 Atk / 252 Spe",
+        "tera_type": "Water/Steel"
+      },
+      {
+        "name": "Bulk Up",
+        "moveslots": [
+          "Bulk Up",
+          "Headlong Rush",
+          "Ice Spinner",
+          "Rapid Spin/Close Combat/Knock Off"
+        ],
+        "item": "Booster Energy",
+        "ability": "Protosynthesis",
+        "nature": "Jolly",
+        "evs": "252 HP / 4 Atk / 252 Spe",
+        "tera_type": "Poison/Ice/Steel"
       }
     ]
   },
@@ -22942,18 +23334,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Lead",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Stealth Rock",
+          "Steel Beam",
+          "Earth Power",
+          "Rapid Spin"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Booster Energy",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Ghost"
+      },
+      {
+        "name": "Utility",
+        "moveslots": [
+          "Stealth Rock",
+          "Earthquake",
+          "Knock Off/Ice Spinner",
+          "Rapid Spin"
+        ],
+        "item": "Leftovers/Air Balloon",
+        "ability": "Quark Drive",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Ghost"
       }
     ]
   },
@@ -23088,18 +23494,18 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Offensive",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Fiery Dance",
+          "Sludge Wave",
+          "Dazzling Gleam/Psychic/Tera Blast/Energy Ball",
+          "Substitute/Dazzling Gleam"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Booster Energy",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "124 Def / 132 SpA / 252 Spe",
+        "tera_type": "Fairy/Ghost/Ground/Grass"
       }
     ]
   },
@@ -23230,7 +23636,7 @@
     "id": 1000,
     "name": "Gholdengo",
     "abilities": [
-      "Good As Gold"
+      "Good as Gold"
     ],
     "stats": {
       "HP": 87,
@@ -23248,18 +23654,60 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Offensive Nasty Plot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Nasty Plot",
+          "Shadow Ball",
+          "Make It Rain/Dazzling Gleam",
+          "Recover/Psyshock/Focus Blast"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Air Balloon/Heavy-Duty Boots",
+        "ability": "Good as Gold",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Fairy/Steel"
+      },
+      {
+        "name": "Bulky Nasty Plot",
+        "moveslots": [
+          "Nasty Plot",
+          "Shadow Ball",
+          "Recover",
+          "Make It Rain/Dazzling Gleam"
+        ],
+        "item": "Air Balloon/Heavy-Duty Boots/Rocky Helmet",
+        "ability": "Good as Gold",
+        "nature": "Bold",
+        "evs": "252 HP / 196 Def / 60 Spe",
+        "tera_type": "Fairy/Water"
+      },
+      {
+        "name": "Thunder Wave + Hex",
+        "moveslots": [
+          "Hex",
+          "Thunder Wave",
+          "Recover",
+          "Make It Rain/Dazzling Gleam/Thunder Wave"
+        ],
+        "item": "Air Balloon/Leftovers/Rocky Helmet",
+        "ability": "Good as Gold",
+        "nature": "Bold",
+        "evs": "252 HP / 196 Def / 60 Spe",
+        "tera_type": "Fairy/Water"
+      },
+      {
+        "name": "Choice Scarf",
+        "moveslots": [
+          "Shadow Ball",
+          "Make It Rain",
+          "Trick",
+          "Focus Blast/Nasty Plot/Recover"
+        ],
+        "item": "Choice Scarf",
+        "ability": "Good as Gold",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Fight/Flying"
       }
     ]
   },
@@ -23357,18 +23805,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive Hazard Setter",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Spikes/Stealth Rock",
+          "Earthquake",
+          "Whirlwind",
+          "Ruination"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Leftovers/Heavy-Duty Boots/Red Card",
+        "ability": "Vessel of Ruin",
+        "nature": "Careful",
+        "evs": "252 HP / 4 Def / 252 SpD",
+        "tera_type": "Poison/Ghost"
+      },
+      {
+        "name": "Rest",
+        "moveslots": [
+          "Earthquake",
+          "Rest",
+          "Ruination/Payback",
+          "Sleep Talk/Stealth Rock"
+        ],
+        "item": "Leftovers",
+        "ability": "Vessel of Ruin",
+        "nature": "Careful",
+        "evs": "252 HP / 4 Def / 252 SpD",
+        "tera_type": "Water/Poison"
       }
     ]
   },
@@ -23510,18 +23972,60 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Mixed",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Moonblast",
+          "Close Combat/Encore",
+          "Knock Off/Encore",
+          "Encore/Destiny Bond"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Booster Energy",
+        "ability": "Quark Drive",
+        "nature": "Naive",
+        "evs": "4 Atk / 252 SpA / 252 Spe",
+        "tera_type": "Steel/Fairy"
+      },
+      {
+        "name": "Calm Mind",
+        "moveslots": [
+          "Calm Mind",
+          "Moonblast",
+          "Shadow Ball/Psyshock",
+          "Encore/Thunderbolt"
+        ],
+        "item": "Booster Energy",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Ghost/Steel/Electric"
+      },
+      {
+        "name": "Swords Dance",
+        "moveslots": [
+          "Swords Dance",
+          "Close Combat",
+          "Knock Off",
+          "Encore/Spirit Break"
+        ],
+        "item": "Booster Energy",
+        "ability": "Quark Drive",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Dark/Steel"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Moonblast",
+          "Shadow Ball",
+          "Thunderbolt/Focus Blast",
+          "Trick/Vacuum Wave/Psyshock"
+        ],
+        "item": "Choice Specs",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Fairy"
       }
     ]
   },
@@ -23619,18 +24123,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Boots Pivot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Surf/Scald",
+          "Draco Meteor",
+          "Knock Off",
+          "Flip Turn"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Protosynthesis",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Fairy/Water"
+      },
+      {
+        "name": "Sun Wallbreaker",
+        "moveslots": [
+          "Hydro Steam",
+          "Draco Meteor",
+          "Flamethrower",
+          "Dragon Pulse/Flip Turn"
+        ],
+        "item": "Choice Specs",
+        "ability": "Protosynthesis",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Water/Fairy"
       }
     ]
   },
@@ -23945,18 +24463,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Calm Mind",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Calm Mind",
+          "Thunderclap",
+          "Dragon Pulse/Draco Meteor",
+          "Thunderbolt"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Booster Energy/Leftovers",
+        "ability": "Protosynthesis",
+        "nature": "Modest",
+        "evs": "4 Def / 252 SpA / 252 Spe (20 Atk IVs)",
+        "tera_type": "Fairy/Flying/Bug"
+      },
+      {
+        "name": "Pivot",
+        "moveslots": [
+          "Thunderclap",
+          "Volt Switch",
+          "Dragon Pulse",
+          "Taunt"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Protosynthesis",
+        "nature": "Modest",
+        "evs": "252 SpA / 4 SpD / 252 Spe (20 Atk IVs)",
+        "tera_type": "Fairy"
       }
     ]
   },
@@ -24003,18 +24535,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Assault Vest",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Tachyon Cutter",
+          "Future Sight/Psychic Noise",
+          "Focus Blast",
+          "Volt Switch"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Assault Vest",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (20 Atk IVs)",
+        "tera_type": "Fighting/Fairy"
+      },
+      {
+        "name": "Choice Specs",
+        "moveslots": [
+          "Tachyon Cutter",
+          "Future Sight/Psychic Noise",
+          "Volt Switch",
+          "Focus Blast"
+        ],
+        "item": "Choice Specs",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe",
+        "tera_type": "Steel/Fighting"
+      },
+      {
+        "name": "Calm Mind",
+        "moveslots": [
+          "Calm Mind",
+          "Tachyon Cutter",
+          "Psyshock/Psychic Noise",
+          "Focus Blast"
+        ],
+        "item": "Booster Energy",
+        "ability": "Quark Drive",
+        "nature": "Timid",
+        "evs": "84 HP / 172 SpA / 252 Spe (20 Atk IVs)",
+        "tera_type": "Fighting/Fairy"
       }
     ]
   },
@@ -24060,18 +24620,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Pivot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Malignant Chain",
+          "Hex/Foul Play",
+          "Parting Shot",
+          "Recover"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots/Air Balloon",
+        "ability": "Poison Puppeteer",
+        "nature": "Timid/Bold",
+        "evs": "252 HP / 228 Def / 28 Spe (0 Atk IVs)",
+        "tera_type": "Ghost/Dark"
+      },
+      {
+        "name": "Nasty Plot",
+        "moveslots": [
+          "Nasty Plot",
+          "Malignant Chain",
+          "Hex/Shadow Ball",
+          "Recover"
+        ],
+        "item": "Heavy-Duty Boots/Air Balloon",
+        "ability": "Poison Puppeteer",
+        "nature": "Timid",
+        "evs": "252 SpA / 4 SpD / 252 Spe (0 Atk IVs)",
+        "tera_type": "Ghost/Dark"
       }
     ]
   },
@@ -24668,18 +25242,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Stealth Rock",
+          "Earth Power/Earthquake",
+          "U-turn",
+          "Taunt"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Rocky Helmet",
+        "ability": "Intimidate",
+        "nature": "Timid/Jolly",
+        "evs": "252 HP / 4 Def / 252 Spe",
+        "tera_type": "Water/Dragon"
+      },
+      {
+        "name": "Offensive",
+        "moveslots": [
+          "Stealth Rock",
+          "Earthquake",
+          "Stone Edge",
+          "U-turn/Taunt"
+        ],
+        "item": "Soft Sand",
+        "ability": "Intimidate",
+        "nature": "Jolly",
+        "evs": "8 HP / 240 Atk / 8 SpD / 252 Spe",
+        "tera_type": "Ground/Water"
+      },
+      {
+        "name": "Choice Scarf",
+        "moveslots": [
+          "Earthquake",
+          "Tera Blast",
+          "Stone Edge",
+          "U-turn"
+        ],
+        "item": "Choice Scarf",
+        "ability": "Intimidate",
+        "nature": "Jolly",
+        "evs": "8 HP / 240 Atk / 8 SpD / 252 Spe",
+        "tera_type": "Ice/Flying"
       }
     ]
   },
@@ -28013,18 +28615,32 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Defensive Pivot",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Future Sight/Psychic Noise",
+          "Chilly Reception",
+          "Sludge Bomb",
+          "Thunder Wave/Toxic"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Heavy-Duty Boots",
+        "ability": "Regenerator",
+        "nature": "Sassy",
+        "evs": "252 HP / 16 Def / 240 SpD (0 Spe IVs)",
+        "tera_type": "Water/Grass/Fairy"
+      },
+      {
+        "name": "Assault Vest",
+        "moveslots": [
+          "Psyshock/Psychic Noise",
+          "Sludge Bomb",
+          "Flamethrower",
+          "Ice Beam"
+        ],
+        "item": "Assault Vest",
+        "ability": "Regenerator",
+        "nature": "Modest",
+        "evs": "252 HP / 16 Def / 144 SpA / 96 SpD",
+        "tera_type": "Water/Grass"
       }
     ]
   },
@@ -29526,18 +30142,74 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Lead",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Ceaseless Edge",
+          "Razor Shell/Aqua Cutter",
+          "Aqua Jet/Sucker Punch",
+          "Knock Off/Taunt/Encore"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Focus Sash",
+        "ability": "Sharpness",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Ghost"
+      },
+      {
+        "name": "Boots Attacker",
+        "moveslots": [
+          "Ceaseless Edge",
+          "Razor Shell/Aqua Cutter",
+          "Knock Off",
+          "Encore/Flip Turn"
+        ],
+        "item": "Heavy-Duty Boots",
+        "ability": "Sharpness",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Poison/Fire"
+      },
+      {
+        "name": "Choice Scarf",
+        "moveslots": [
+          "Ceaseless Edge",
+          "Razor Shell/Aqua Cutter",
+          "Knock Off",
+          "Flip Turn/Sacred Sword"
+        ],
+        "item": "Choice Scarf",
+        "ability": "Sharpness",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Water/Dark"
+      },
+      {
+        "name": "Assault Vest",
+        "moveslots": [
+          "Ceaseless Edge",
+          "Razor Shell/Aqua Cutter",
+          "Aqua Jet/Sucker Punch",
+          "Knock Off/Flip Turn"
+        ],
+        "item": "Assault Vest",
+        "ability": "Sharpness",
+        "nature": "Adamant",
+        "evs": "172 HP / 252 Atk / 84 Spe",
+        "tera_type": "Poison"
+      },
+      {
+        "name": "Swords Dance",
+        "moveslots": [
+          "Swords Dance",
+          "Ceaseless Edge",
+          "Razor Shell/Aqua Cutter",
+          "Sucker Punch"
+        ],
+        "item": "Black Glasses",
+        "ability": "Sharpness",
+        "nature": "Adamant/Jolly",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Dark"
       }
     ]
   },
@@ -30439,18 +31111,46 @@
     "Tier": "OU",
     "strategies": [
       {
-        "name": "",
+        "name": "Swords Dance",
         "moveslots": [
-          "",
-          "",
-          "",
-          ""
+          "Swords Dance",
+          "Ivy Cudgel",
+          "Power Whip/Horn Leech",
+          "Play Rough/Encore/Knock Off"
         ],
-        "item": "",
-        "ability": "",
-        "nature": "",
-        "evs": "",
-        "tera_type": ""
+        "item": "Wellspring Mask",
+        "ability": "Water Absorb/Embody Aspect",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Water"
+      },
+      {
+        "name": "All-Out Attacker",
+        "moveslots": [
+          "Ivy Cudgel",
+          "Power Whip",
+          "Knock Off/Trailblaze",
+          "Play Rough/Trailblaze"
+        ],
+        "item": "Wellspring Mask",
+        "ability": "Water Absorb/Embody Aspect",
+        "nature": "Adamant",
+        "evs": "252 Atk / 4 Def / 252 Spe",
+        "tera_type": "Water"
+      },
+      {
+        "name": "Offensive Pivot",
+        "moveslots": [
+          "Ivy Cudgel",
+          "Horn Leech",
+          "U-turn",
+          "Knock Off/Encore/Spikes"
+        ],
+        "item": "Wellspring Mask",
+        "ability": "Water Absorb/Embody Aspect",
+        "nature": "Jolly",
+        "evs": "252 Atk / 4 SpD / 252 Spe",
+        "tera_type": "Water"
       }
     ]
   },

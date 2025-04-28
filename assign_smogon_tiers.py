@@ -1,37 +1,37 @@
 import json
 
-# Load Pokémon data
-with open("all_pokemon_tiered.json", "r", encoding="utf-8") as f:
-    pokemon_data = json.load(f)
+INPUT_FILE = "all_pokemon_with_tiers.json"
+OUTPUT_FILE = "all_pokemon_with_strategies.json"
 
-# Helper to load tier list from text file
-def load_tier_list(filename):
-    with open(filename, "r", encoding="utf-8") as f:
-        return set(line.strip().lower() for line in f if line.strip())
+def add_empty_strategies(data):
+    updated_count = 0
+    for entry in data:
+        if "strategies" not in entry:  # Only add if missing, to avoid overwriting
+            entry["strategies"] = [
+                {
+                    "name": "",
+                    "moveslots": ["", "", "", ""],
+                    "item": "",
+                    "ability": "",
+                    "nature": "",
+                    "evs": "",
+                    "tera_type": ""
+                }
+            ]
+            updated_count += 1
+    print(f"{updated_count} Pokémon updated with empty strategy template.")
+    return data
 
-# Load tier lists
-uber_pokemon = load_tier_list("uber.txt")
-ou_pokemon = load_tier_list("ou.txt")
-uu_pokemon = load_tier_list("uu.txt")
+def main():
+    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-# Update tier and log ranked Pokémon
-for pokemon in pokemon_data:
-    name = pokemon["name"].lower()
-    if name in uber_pokemon:
-        tier = "Uber"
-    elif name in ou_pokemon:
-        tier = "OU"
-    elif name in uu_pokemon:
-        tier = "UU"
-    else:
-        tier = "Unranked"
+    enriched_data = add_empty_strategies(data)
 
-    pokemon["Tier"] = tier
-    if tier != "Unranked":
-        print(f"{pokemon['name'].capitalize()} - Tier set to: {tier}")
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(enriched_data, f, indent=2)
 
-# Save updated JSON
-with open("all_pokemon_tiered_with_tiers.json", "w", encoding="utf-8") as f:
-    json.dump(pokemon_data, f, indent=2)
+    print(f"\nData with placeholders written to {OUTPUT_FILE}")
 
-print("\nRanked tiers have been assigned and saved to 'all_pokemon_tiered_with_tiers.json'.")
+if __name__ == "__main__":
+    main()
