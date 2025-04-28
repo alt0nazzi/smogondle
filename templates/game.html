@@ -354,23 +354,25 @@
 
       <form method="POST" action="/guess" class="flex gap-2 mb-6">
         <div class="relative flex-1">
-          <input
-            type="text"
-            name="guess"
-            id="guess-input"
-            list="pokemon-list"
-            placeholder="Enter Pokémon..."
-            oninput="updateSuggestions(this.value)"
-            required
-            autocomplete="off"
-            class="peer w-full px-4 py-3 pt-5 rounded-xl bg-gray-700 text-white placeholder-transparent border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 {% if guess_wrong %}animate-shake{% endif %}"
-          >
-          <label
-            for="guess-input"
-            class="absolute left-4 top-3 text-gray-400 text-sm transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-3 peer-focus:text-sm peer-focus:text-indigo-400"
-          >
-            Enter Pokémon...
-          </label>
+          <div class="relative w-full">
+            <input
+              type="text"
+              name="guess"
+              id="guess-input"
+              list="pokemon-list"
+              placeholder=" "
+              required
+              autocomplete="off"
+              oninput="updateSuggestions(this.value)"
+              class="peer w-full px-4 py-3 pt-5 rounded-xl bg-gray-700 text-white placeholder-transparent border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
+            />          
+            <label
+              for="guess-input"
+              class="absolute left-4 top-3 text-gray-400 text-sm transition-all peer-focus:hidden peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500"
+            >
+              Enter Pokémon...
+            </label>
+          </div>          
           <datalist id="pokemon-list"></datalist>
         </div>      
         <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700">Guess</button>
