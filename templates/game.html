@@ -332,9 +332,23 @@
         <p class="text-center text-sm text-gray-400 italic">Guess the Pokémon from Smogon forum hints!</p>       
       </div>
 
-      <div class="flex justify-center mb-6">
-        <button onclick="toggleFilters()" class="px-6 py-2 bg-gradient-to-r from-purple-700 to-indigo-600 text-white rounded-lg hover:brightness-110 transition duration-300">
+      <div class="flex flex-wrap justify-center mb-6 gap-4">
+        <button onclick="openFilters()" class="px-6 py-2 bg-gradient-to-r from-purple-700 to-indigo-600 text-white rounded-lg hover:brightness-110 transition duration-300">
           Filters
+        </button>
+        
+        {% if is_daily %}
+        <a href="/reset" class="ml-4 px-6 py-2 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-lg hover:brightness-110 transition duration-300">
+          Classic Mode
+        </a>
+        {% else %}
+        <a href="/daily" class="ml-4 px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-500 text-white rounded-lg hover:brightness-110 transition duration-300">
+          Daily Challenge!
+        </a>
+        {% endif %}
+        
+        <button onclick="openLeaderboard()" class="ml-4 px-6 py-2 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-lg hover:brightness-110 transition duration-300">
+          Leaderboard
         </button>
       </div>      
 
@@ -364,6 +378,12 @@
         <a href="/giveup" class="px-6 py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 ml-2">Give up?</a>
         {% endif %}
       </form>
+
+      {% if is_daily %}
+        <div class="text-center text-cyan-400 text-lg mb-4">
+          Daily Challenge - {{ current_date }}
+        </div>
+      {% endif %}
 
       <div class="mb-6">
         <h2 class="text-xl font-semibold mb-2">Hints:</h2>
@@ -395,25 +415,24 @@
         </ul>
       </div>
 
+      {% if not is_daily %}
       <div class="flex flex-col items-center mt-8 space-y-2">
         <div id="floating-points-container" class="relative h-0"></div>
-        <div class="text-3xl font-bold text-cyan-300 drop-shadow-lg {% if last_correct %}animate-score-pop{% endif %}">
+        <div id="score-display" class="text-3xl font-bold text-cyan-300 drop-shadow-lg">
           Score: {{ score }}
         </div>      
-        <div class="text-xl font-semibold text-blue-200">
+        <div id="rounds-display" class="text-xl font-semibold text-blue-200">
           Rounds: {{ rounds }}
         </div>
-        <div class="mt-6">
-          <button onclick="toggleSettings()" class="text-blue-300 hover:text-cyan-400 transition duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l.518 1.594a1 1 0 00.95.69h1.664c.969 0 1.371 1.24.588 1.81l-1.347.978a1 1 0 000 1.64l1.347.978c.783.57.38 1.81-.588 1.81h-1.664a1 1 0 00-.95.69l-.518 1.594c-.3.921-1.603.921-1.902 0l-.518-1.594a1 1 0 00-.95-.69H8.405c-.969 0-1.371-1.24-.588-1.81l1.347-.978a1 1 0 000-1.64l-1.347-.978c-.783-.57-.38-1.81.588-1.81h1.664a1 1 0 00.95-.69l.518-1.594z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </button>
-        </div>
-      </div>    
+        <button onclick="openSettings()" class="p-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:brightness-110 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9.75 3a1.75 1.75 0 00-1.75 1.75v1.232a7.014 7.014 0 00-1.272.743l-.872-.872a1.75 1.75 0 10-2.475 2.475l.872.872c-.345.39-.635.81-.872 1.272H4.75A1.75 1.75 0 003 9.75v4.5A1.75 1.75 0 004.75 16h1.232c.237.462.527.882.872 1.272l-.872.872a1.75 1.75 0 102.475 2.475l.872-.872c.39.345.81.635 1.272.872v1.232A1.75 1.75 0 009.75 21h4.5A1.75 1.75 0 0016 19.25v-1.232a7.014 7.014 0 001.272-.872l.872.872a1.75 1.75 0 102.475-2.475l-.872-.872c.345-.39.635-.81.872-1.272h1.232A1.75 1.75 0 0021 14.25v-4.5A1.75 1.75 0 0019.25 8h-1.232a7.014 7.014 0 00-.872-1.272l.872-.872a1.75 1.75 0 00-2.475-2.475l-.872.872c-.39-.345-.81-.635-1.272-.872V4.75A1.75 1.75 0 0014.25 3h-4.5z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </button>              
+      </div>
+      {% endif %}
 
       {% if image_revealed %}
       <div class="text-center mb-6">
@@ -601,46 +620,38 @@
 </script>
 {% endif %}
 <!-- Settings Modal -->
-<div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
-  <div id="settings-card" class="bg-indigo-900 rounded-lg p-8 space-y-6 w-80 shadow-2xl opacity-0">
-    <h2 class="text-2xl font-bold text-cyan-300 text-center mb-4">Settings</h2>
+<div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+  <div class="bg-indigo-800 p-8 rounded-lg w-96 space-y-6">
+    <h2 class="text-2xl text-cyan-300 font-bold text-center">Settings</h2>
 
-    <!-- Future settings toggles -->
-    <!-- Music Toggle -->
     <div class="flex items-center justify-between">
-      <span class="text-blue-200">Music</span>
+      <span class="text-blue-100">Music</span>
       <label class="relative inline-flex items-center cursor-pointer">
-        <input id="music-toggle" type="checkbox" class="sr-only peer">
-        <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:bg-cyan-400 transition-colors duration-300 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+        <input type="checkbox" id="music-toggle" class="sr-only peer">
+        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:bg-cyan-400 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full"></div>
       </label>
     </div>
 
-    <!-- Cinematics Toggle -->
     <div class="flex items-center justify-between">
-      <span class="text-blue-200">Cinematics</span>
+      <span class="text-blue-100">Cinematics</span>
       <label class="relative inline-flex items-center cursor-pointer">
-        <input id="cinematics-toggle" type="checkbox" class="sr-only peer">
-        <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:bg-cyan-400 transition-colors duration-300 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+        <input type="checkbox" id="cinematics-toggle" class="sr-only peer">
+        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:bg-cyan-400 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full"></div>
       </label>
     </div>
 
-    <!-- Restart Button moved here -->
-    <form action="{{ url_for('restart') }}" method="post" class="flex justify-center">
-      <button type="submit" class="px-6 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-xl hover:brightness-110 transition duration-300">
-        Restart Smogondle
-      </button>
+    <form method="POST" action="/restart" class="flex justify-center mt-6">
+      <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Restart</button>
     </form>
 
     <div class="flex justify-center">
-      <button onclick="toggleSettings()" class="mt-4 text-blue-300 hover:text-cyan-400">
-        Close
-      </button>
+      <button onclick="closeSettings()" class="text-cyan-300 mt-4 hover:text-cyan-400">Close</button>
     </div>
   </div>
 </div>
 <!-- Filters Modal -->
 <div id="filters-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
-  <div id="filters-card" class="bg-indigo-900 rounded-lg p-8 space-y-6 w-80 shadow-2xl opacity-0">
+  <div class="bg-indigo-900 rounded-lg p-8 space-y-6 w-80 shadow-2xl">
     <h2 class="text-2xl font-bold text-cyan-300 text-center mb-4">Filters</h2>
 
     <!-- Tiers form inside Filters modal -->
@@ -659,87 +670,51 @@
     </form>
 
     <div class="flex justify-center">
-      <button onclick="toggleFilters()" class="mt-4 text-blue-300 hover:text-cyan-400">
+      <button onclick="closeFilters()" class="mt-4 text-blue-300 hover:text-cyan-400">
         Close
       </button>
     </div>
   </div>
 </div>
+<!-- Leaderboard Modal -->
+<div id="leaderboard-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
+  <div class="bg-indigo-900 rounded-lg p-8 space-y-6 w-96 shadow-2xl">
+    <h2 class="text-2xl font-bold text-cyan-300 text-center mb-4">Daily Leaderboard</h2>
+    <ul id="leaderboard-list" class="space-y-2 text-center text-blue-200">
+      <!-- Scores will be dynamically inserted here -->
+    </ul>
+    <div class="flex justify-center">
+      <button onclick="closeLeaderboard()" class="mt-4 text-blue-300 hover:text-cyan-400">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Name Entry Modal -->
+<div id="name-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
+  <div id="name-card" class="bg-indigo-900 rounded-lg p-8 space-y-6 w-80 shadow-2xl opacity-0">
+    <h2 class="text-2xl font-bold text-cyan-300 text-center mb-4">Congratulations!</h2>
+    <p class="text-center text-blue-200">Enter your name for the Daily Leaderboard:</p>
+    <form method="POST" action="/submit_name" class="flex flex-col items-center space-y-4">
+      <input 
+        type="text" 
+        name="player_name" 
+        required
+        maxlength="20"
+        placeholder="Your Name" 
+        autofocus
+        class="px-4 py-2 rounded-lg w-full bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400"
+      />    
+      <button type="submit" class="px-6 py-2 bg-gradient-to-r from-green-500 to-cyan-400 text-white rounded-xl hover:brightness-110 transition duration-300">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
 <script>
-  function toggleSettings() {
-    const modal = document.getElementById('settings-modal');
-    const card = document.getElementById('settings-card');
-  
-    if (modal.classList.contains('hidden')) {
-      modal.classList.remove('hidden');
-      card.classList.add('animate-slide-fade-up');
-    } else {
-      modal.classList.add('hidden');
-      card.classList.remove('animate-slide-fade-up');
-      card.style.opacity = "0"; // Reset opacity for next open
-    }
-  }
-</script>
-<script>
-  function toggleFilters() {
-    const modal = document.getElementById('filters-modal');
-    const card = document.getElementById('filters-card');
-  
-    if (modal.classList.contains('hidden')) {
-      modal.classList.remove('hidden');
-      card.classList.add('animate-slide-fade-up');
-    } else {
-      modal.classList.add('hidden');
-      card.classList.remove('animate-slide-fade-up');
-      card.style.opacity = "0"; // Reset opacity for next open
-    }
-  }
-</script>  
-<script>
+
   let cinematicsEnabled = true;
-  // Save toggle changes to localStorage
-  function saveToggleStates() {
-    const musicToggle = document.getElementById('music-toggle').checked;
-    const cinematicsToggle = document.getElementById('cinematics-toggle').checked;
-  
-    localStorage.setItem('musicEnabled', musicToggle);
-    localStorage.setItem('cinematicsEnabled', cinematicsToggle);
-  }
-  
-  // Load saved toggle states on page load
-  function loadToggleStates() {
-    const musicState = localStorage.getItem('musicEnabled');
-    const cinematicsState = localStorage.getItem('cinematicsEnabled');
 
-    // Music: default OFF
-    if (musicState === null) {
-      document.getElementById('music-toggle').checked = false;
-      localStorage.setItem('musicEnabled', false);
-    } else {
-      document.getElementById('music-toggle').checked = (musicState === 'true');
-    }
-
-    // Cinematics: default ON
-    if (cinematicsState === null) {
-      document.getElementById('cinematics-toggle').checked = true;
-      localStorage.setItem('cinematicsEnabled', true);
-    } else {
-      document.getElementById('cinematics-toggle').checked = (cinematicsState === 'true');
-    }
-
-    // Update cinematicsEnabled JS flag
-    cinematicsEnabled = (localStorage.getItem('cinematicsEnabled') === 'true');
-  }
-  
-  // Auto-save when user clicks toggle
-  document.addEventListener('DOMContentLoaded', () => {
-    loadToggleStates();
-  
-    document.getElementById('music-toggle').addEventListener('change', saveToggleStates);
-    document.getElementById('cinematics-toggle').addEventListener('change', saveToggleStates);
-  });
-</script>
-<script>
   document.querySelectorAll('input[name="tiers"]').forEach(tierCheckbox => {
     tierCheckbox.addEventListener('change', (e) => {
       const label = e.target.closest('label');
@@ -749,8 +724,7 @@
       }, 300); // match animation duration
     });
   });
-</script>
-<script>
+
   document.querySelectorAll('.tier-button').forEach(label => {
     label.addEventListener('click', (e) => {
       const checkbox = label.querySelector('input[type="checkbox"]');
@@ -767,18 +741,15 @@
       }
     });
   });
-</script>
-<script>
+
   window.addEventListener('load', () => {
     document.body.classList.add('loaded');
   });
-</script>
-<script>
+
   window.addEventListener('scroll', function() {
     document.body.style.backgroundPositionY = -(window.scrollY * 0.2) + 'px';
   });
-</script>
-<script>
+
   window.addEventListener('load', () => {
     const guessInput = document.getElementById('guess-input');
     if (guessInput) {
@@ -786,20 +757,26 @@
     }
   });
   
-  // Optional: Re-focus if user clicks submit (in case of wrong guess and page doesn't reload)
   const guessForm = document.querySelector('form[action="/guess"]');
   if (guessForm) {
     guessForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent immediate submit
+
+      const delay = maybeTriggerCosmicEvent(); // 🚀 Get the correct delay
+
+      setTimeout(() => {
+        guessForm.submit(); // Submit after appropriate delay
+      }, delay);
+
       setTimeout(() => {
         const guessInput = document.getElementById('guess-input');
         if (guessInput) {
           guessInput.focus();
         }
-      }, 100); // slight delay to ensure the DOM updates first
+      }, delay + 100); // Refocus after submit
     });
   }
-</script>
-<script>
+
   document.addEventListener('DOMContentLoaded', () => {
     const guessInput = document.getElementById('guess-input');
     const guessForm = document.querySelector('form[action="/guess"]');
@@ -826,9 +803,296 @@
       }
     });
   });
-</script>  
+
+  function maybeTriggerCosmicEvent() {
+    const roll = Math.random();
+    if (roll < 0.003) {
+      createAurora();
+      return 2500;
+    } else if (roll < 0.006) {
+      createCosmicRipple();
+      return 2000;
+    } else if (roll < 0.02) {
+      createMeteor();
+      return 500;
+    } else if (roll < 0.03) {
+      createSableye();
+      return 2000;
+    }
+    return 300;
+  }
+  
+  function createMeteor() {
+    const meteor = document.createElement('div');
+    meteor.className = 'meteor';
+    meteor.style.position = 'absolute';
+    meteor.style.top = Math.random() * window.innerHeight * 0.7 + 'px';
+    meteor.style.left = '-100px';
+    meteor.style.width = '8px';
+    meteor.style.height = '8px';
+    meteor.style.background = 'white';
+    meteor.style.borderRadius = '50%';
+    meteor.style.boxShadow = '0 0 15px 5px white';
+    meteor.style.zIndex = 5;
+    document.getElementById('cinematics-layer').appendChild(meteor);
+
+    meteor.animate([
+      { transform: 'translateX(0) translateY(0)' },
+      { transform: 'translateX(120vw) translateY(100px)' }
+    ], {
+      duration: 4000,
+      easing: 'ease-out'
+    });
+
+    setTimeout(() => meteor.remove(), 4000);
+  }
+  
+  function createCosmicRipple() {
+    const ripple = document.createElement('div');
+    ripple.className = 'cosmic-ripple';
+    ripple.style.position = 'fixed'; /* not absolute! */
+    ripple.style.top = '50%';
+    ripple.style.left = '50%';
+    ripple.style.transform = 'translate(-50%, -50%)';
+    ripple.style.width = '150px';
+    ripple.style.height = '150px';
+    ripple.style.border = '3px solid cyan';
+    ripple.style.borderRadius = '50%';
+    ripple.style.opacity = '0.8';
+    ripple.style.zIndex = 2; /* BELOW game card */
+    ripple.style.pointerEvents = 'none';
+    document.body.appendChild(ripple);
+
+    ripple.animate([
+      { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.8 },
+      { transform: 'translate(-50%, -50%) scale(6)', opacity: 0 }
+    ], {
+      duration: 2500,
+      easing: 'ease-out'
+    });
+
+    setTimeout(() => ripple.remove(), 2500);
+  }
+  
+  function createAurora() {
+    const aurora = document.createElement('div');
+    aurora.className = 'aurora';
+    aurora.style.position = 'fixed'; /* not absolute! */
+    aurora.style.top = '0';
+    aurora.style.left = '0';
+    aurora.style.width = '100%';
+    aurora.style.height = '300px';
+    aurora.style.background = 'linear-gradient(to bottom, rgba(0,255,255,0.4), transparent)';
+    aurora.style.zIndex = 2; /* BELOW game cards */
+    aurora.style.pointerEvents = 'none';
+    document.body.appendChild(aurora);
+
+    aurora.animate([
+      { opacity: 0 },
+      { opacity: 0.7 },
+      { opacity: 0 }
+    ], {
+      duration: 6000,
+      easing: 'ease-in-out'
+    });
+
+    setTimeout(() => aurora.remove(), 6000);
+  }
+
+  function createSableye() {
+    const sableye = document.createElement('img');
+    sableye.src = '/static/sableye.png'; // ✅ Correct clean static path
+    sableye.style.position = 'fixed';
+    sableye.style.bottom = '20px';
+    sableye.style.right = '-150px'; // Start fully off-screen
+    sableye.style.width = '100px';
+    sableye.style.height = 'auto';
+    sableye.style.zIndex = 10;
+    sableye.style.filter = 'drop-shadow(0 0 10px cyan) drop-shadow(0 0 20px purple)';
+    sableye.style.opacity = '0.9';
+    sableye.style.transition = 'right 2s ease-out';
+
+    document.body.appendChild(sableye);
+
+    // Slide it into position
+    setTimeout(() => {
+      sableye.style.right = '20px';
+    }, 100);
+
+    // After it's parked, start shimmer animation
+    setTimeout(() => {
+      sableye.animate([
+        { filter: 'drop-shadow(0 0 10px cyan) drop-shadow(0 0 20px purple)', opacity: 0.9 },
+        { filter: 'drop-shadow(0 0 20px cyan) drop-shadow(0 0 40px purple)', opacity: 1 },
+        { filter: 'drop-shadow(0 0 10px cyan) drop-shadow(0 0 20px purple)', opacity: 0.9 }
+      ], {
+        duration: 3000,
+        iterations: Infinity
+      });
+    }, 2100); // After sliding animation finishes
+  }
+
+  function launchConfetti() {
+    const duration = 2 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 11 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    const interval = setInterval(function() {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      confetti({
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+        ...defaults
+      });
+      confetti({
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+        ...defaults
+      });
+    }, 250);
+  }
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  function saveToggleStates() {
+    const musicToggle = document.getElementById('music-toggle').checked;
+    const cinematicsToggle = document.getElementById('cinematics-toggle').checked;
+    localStorage.setItem('musicEnabled', musicToggle);
+    localStorage.setItem('cinematicsEnabled', cinematicsToggle);
+  }
+
+  function loadToggleStates() {
+    const musicState = localStorage.getItem('musicEnabled');
+    const cinematicsState = localStorage.getItem('cinematicsEnabled');
+
+    if (musicState !== null) {
+      document.getElementById('music-toggle').checked = (musicState === 'true');
+    }
+    if (cinematicsState !== null) {
+      document.getElementById('cinematics-toggle').checked = (cinematicsState === 'true');
+    }
+  }
+
+  loadToggleStates();
+
+  document.getElementById('music-toggle').addEventListener('change', saveToggleStates);
+  document.getElementById('cinematics-toggle').addEventListener('change', saveToggleStates);
+
+  });
+    
+</script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <audio id="background-music" loop autoplay hidden>
   <source src="/static/background-music.mp3" type="audio/mpeg">
 </audio>
+<script>
+  function openSettings() {
+    document.getElementById('settings-modal').classList.remove('hidden');
+  }
+  function closeSettings() {
+    document.getElementById('settings-modal').classList.add('hidden');
+  }
+  
+  function openFilters() {
+    document.getElementById('filters-modal').classList.remove('hidden');
+  }
+  function closeFilters() {
+    document.getElementById('filters-modal').classList.add('hidden');
+  }
+  
+  function openLeaderboard() {
+    document.getElementById('leaderboard-modal').classList.remove('hidden');
+    fetchLeaderboard();
+  }
+  function closeLeaderboard() {
+    document.getElementById('leaderboard-modal').classList.add('hidden');
+  }
+  
+  function fetchLeaderboard() {
+  fetch('/leaderboard')
+    .then(response => response.json())
+    .then(data => {
+      const list = document.getElementById('leaderboard-list');
+      list.innerHTML = '';
+
+      if (data.length === 0) {
+        list.innerHTML = '<li class="text-blue-300">No scores yet today!</li>';
+      } else {
+        data.forEach(([name, score, time], index) => {
+          const li = document.createElement('li');
+          
+          let medal = "";
+          if (index === 0) {
+            medal = "🥇 ";
+          } else if (index === 1) {
+            medal = "🥈 ";
+          } else if (index === 2) {
+            medal = "🥉 ";
+          }
+
+          li.innerHTML = `
+            <span class="text-indigo-300 font-bold">${medal}${index + 1}. ${name}</span> 
+            <span class="text-cyan-300">- ${score} pts</span> 
+            <span class="text-purple-300">⏱ ${Math.round(time)}s</span>
+          `;
+          
+          list.appendChild(li);
+        });
+      }
+    });
+}
+</script>
+{% if show_name_entry %}
+<script>
+window.addEventListener('load', () => {
+  const nameModal = document.getElementById('name-modal');
+  const nameCard = document.getElementById('name-card');
+  if (nameModal && nameCard) {
+    nameModal.classList.remove('hidden');
+    setTimeout(() => {
+      nameCard.classList.remove('opacity-0');
+      nameCard.classList.add('animate-fade-in');
+    }, 100); // Tiny delay so backdrop fully appears first
+  }
+});
+</script>
+{% endif %}
+{% if show_leaderboard %}
+<script>
+window.addEventListener('load', () => {
+  openLeaderboard();
+});
+</script>
+{% endif %}
+<script>
+  window.addEventListener('load', () => {
+    const scoreDisplay = document.getElementById('score-display');
+    const roundsDisplay = document.getElementById('rounds-display');
+  
+    {% if score == 0 %}
+      if (scoreDisplay) {
+        scoreDisplay.classList.add('animate-score-pop');
+        setTimeout(() => scoreDisplay.classList.remove('animate-score-pop'), 500);
+      }
+    {% endif %}
+  
+    {% if rounds == 0 %}
+      if (roundsDisplay) {
+        roundsDisplay.classList.add('animate-score-pop');
+        setTimeout(() => roundsDisplay.classList.remove('animate-score-pop'), 500);
+      }
+    {% endif %}
+  });
+</script>  
 </body>
 </html>
