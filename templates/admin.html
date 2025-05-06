@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html class="bg-gray-900 text-white">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-8">
+  <h1 class="text-3xl font-bold mb-6">Admin Panel</h1>
+  <table class="w-full table-auto text-left text-white bg-gray-800 border border-gray-700 rounded-lg">
+    <thead class="bg-gray-700">
+      <tr>
+        <th class="p-3">ID</th>
+        <th class="p-3">Username</th>
+        <th class="p-3">Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr class="border-t border-gray-700">
+        <td class="p-3">{{ user[0] }}</td>
+        <td class="p-3">{{ user[1] }}</td>
+        <td class="p-3">{{ 'Yes' if user[2] == 1 else 'No' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="/" class="inline-block mt-6 text-indigo-400 hover:underline">← Back to game</a>
+</body>
+</html>
