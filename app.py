@@ -4,9 +4,18 @@ import json
 import random
 from difflib import get_close_matches
 import os
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+def is_admin():
+    return session.get("username") and session.get("is_admin") == 1
 
 with open("all_pokemon_with_tiers.json", "r", encoding="utf-8") as f:
     all_pokemon = json.load(f)
@@ -161,6 +170,7 @@ def game():
     score = session.get("score", 0)
     rounds = session.get("rounds", 0)
     show_leaderboard = session.pop('show_leaderboard', False)
+    daily_already_played = session.pop("daily_already_played", False)
     revealed = session.get("revealed", False)
     selected_tiers = session.get("tiers", [])
     hint_index = session.get("hint_index", 0)
@@ -199,7 +209,9 @@ def game():
         is_daily=is_daily,
         current_date = datetime.now().strftime("%B %d, %Y"),
         show_leaderboard=show_leaderboard,
-        show_name_entry=session.get("show_name_entry", False)
+        show_name_entry=session.get("show_name_entry", False),
+        user=current_user if current_user.is_authenticated else None,
+        daily_already_played=daily_already_played
     )
 
 @app.route("/guess", methods=["POST"])
@@ -216,8 +228,13 @@ def guess():
         if session.get("is_daily", False):
             time_taken = datetime.now().timestamp() - session.get("start_time", datetime.now().timestamp())
             session["time_taken"] = time_taken
-            session["pending_score"] = session["score"]
-            session["show_name_entry"] = True
+            pending_score = session["score"]
+            if current_user.is_authenticated:
+                save_daily_score(current_user.username, pending_score, time_taken)
+            session["show_leaderboard"] = True
+            session["is_daily"] = False
+            session["score"] = 0
+            session["rounds"] = 0
         session["points_earned"] = earned_points
         session["guess_wrong"] = False
         session["bonus_multiplier"] = (earned_points > 100)  # True if x1.5 was applied
@@ -227,15 +244,39 @@ def guess():
     return redirect(url_for("game"))
 
 @app.route("/daily")
+@login_required
 def daily_challenge():
     today = datetime.now().strftime("%Y-%m-%d")
-    pokemon_list = [p for p in all_pokemon if p["Tier"] in TIER_OPTIONS and p["Tier"] != "Unranked"]
+    conn = sqlite3.connect('smogondle.db')
+    cur = conn.cursor()
+    cur.execute("SELECT 1 FROM daily_attempts WHERE user_id = ? AND date = ?", (current_user.id, today))
+    if cur.fetchone():
+        conn.close()
+        session["daily_already_played"] = True
+        return redirect(url_for("game"))
 
+    # generate challenge
     seed = sum(ord(c) for c in today)
     random.seed(seed)
-    daily_pokemon = random.choice(pokemon_list)
+    daily_pokemon = random.choice([p for p in all_pokemon if p["Tier"] in TIER_OPTIONS and p["Tier"] != "Unranked"])
 
-    session.clear()
+    # mark completion
+    cur.execute("INSERT INTO daily_attempts (user_id, date) VALUES (?, ?)", (current_user.id, today))
+    conn.commit()
+    conn.close()
+
+    session.pop("pokemon", None)
+    session.pop("score", None)
+    session.pop("rounds", None)
+    session.pop("hint_index", None)
+    session.pop("start_time", None)
+    session.pop("revealed", None)
+    session.pop("last_correct", None)
+    session.pop("pending_score", None)
+    session.pop("time_taken", None)
+    session.pop("guess_wrong", None)
+    session.pop("bonus_multiplier", None)
+    session.pop("seen_pokemon_ids", None)
     session["pokemon"] = daily_pokemon
     session["is_daily"] = True
     session["score"] = 0
@@ -284,8 +325,22 @@ def pick_new_pokemon():
     if not tiers:
         tiers = ["OU"]
         session["tiers"] = tiers
+
     filtered = [p for p in all_pokemon if p["Tier"] in tiers]
-    session["pokemon"] = random.choice(filtered)
+
+    seen_ids = session.get("seen_pokemon_ids", [])
+
+    unseen = [p for p in filtered if p["id"] not in seen_ids]
+
+    if unseen:
+        chosen = random.choice(unseen)
+        seen_ids.append(chosen["id"])
+        session["seen_pokemon_ids"] = seen_ids
+    else:
+        chosen = random.choice(filtered)
+        session["seen_pokemon_ids"] = [chosen["id"]]
+
+    session["pokemon"] = chosen
     session["hint_index"] = 0
     session["revealed"] = False
 
@@ -311,23 +366,85 @@ def update_tiers():
     session["fade_in"] = True
     return redirect(url_for("game"))
 
-@app.route("/submit_name", methods=["POST"])
-def submit_name():
-    player_name = request.form.get("player_name", "Anonymous")
-    pending_score = session.pop("pending_score", None)
-    time_taken = session.pop("time_taken", None)
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    error = None
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        conn = sqlite3.connect('smogondle.db', check_same_thread=False)
+        cur = conn.cursor()
+        cur.execute("SELECT id FROM users WHERE username = ?", (username,))
+        if cur.fetchone():
+            error = "Username already taken."
+        else:
+            hashed = generate_password_hash(password)
+            cur.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed))
+            conn.commit()
+            conn.close()
+            return redirect(url_for("login"))
+        conn.close()
+    return render_template("register.html", error=error)
 
-    if pending_score is not None and time_taken is not None:
-        save_daily_score(player_name, pending_score, time_taken)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
 
-    session["player_name"] = player_name
-    session.pop("show_name_entry", None)
-    session.pop("is_daily", None)
+        conn = sqlite3.connect('smogondle.db')
+        cur = conn.cursor()
+        cur.execute("SELECT id, username, password, is_admin FROM users WHERE username = ?", (username,))
+        user = cur.fetchone()
+        conn.close()
 
-    session["score"] = 0 
-    session["rounds"] = 0
-    session["show_leaderboard"] = True
-    return redirect(url_for("game"))
+        if user and check_password_hash(user[2], password):  # user[2] is hashed password
+            user_obj = User(user[0], user[1], user[3])  # include is_admin
+            login_user(user_obj)  # ✅ Properly log in user using Flask-Login
+            session['is_admin'] = bool(user[3])
+            return redirect(url_for('game'))
+        else:
+            error = "Invalid username or password."
+
+    return render_template('login.html', error=error)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
+
+class User(UserMixin):
+    def __init__(self, id, username, is_admin=False):
+        self.id = id
+        self.username = username
+        self.is_admin = is_admin
+
+@login_manager.user_loader
+def load_user(user_id):
+    conn = sqlite3.connect('smogondle.db')
+    cur = conn.cursor()
+    cur.execute("SELECT id, username, is_admin FROM users WHERE id = ?", (user_id,))
+    row = cur.fetchone()
+    conn.close()
+    if row:
+        return User(*row)  # (id, username, is_admin)
+    return None
+
+@app.route("/admin")
+def admin():
+    if not session.get("username"):
+        return redirect("/login")
+    if session.get("is_admin") != 1:
+        return "Access denied", 403
+
+    conn = sqlite3.connect("smogondle.db")
+    cur = conn.cursor()
+    cur.execute("SELECT id, username, is_admin FROM users")
+    users = cur.fetchall()
+    conn.close()
+    return render_template("admin.html", users=users)
 
 if __name__ == "__main__":
     app.run(debug=True)
