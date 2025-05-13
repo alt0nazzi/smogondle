@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="{{ theme_colors.text or 'text-white' }}">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile | Smogondle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glow-epic {
+      text-shadow: 0 0 6px #a855f7, 0 0 10px #c084fc;
+      transition: transform 0.2s ease, text-shadow 0.2s ease;
+    }
+    .glow-epic:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 14px #c084fc, 0 0 22px #d8b4fe;
+    }
+
+    .glow-legendary {
+      text-shadow: 0 0 6px #facc15, 0 0 10px #fde68a;
+      transition: transform 0.2s ease, text-shadow 0.2s ease;
+    }
+    .glow-legendary:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 14px #fde047, 0 0 22px #fde047;
+    }
+
+    .petal {
+      position: absolute;
+      top: -2rem;
+      width: 24px;
+      height: 24px;
+      background-image: url("/static/petal.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+      animation: fall 12s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateX(0px) translateY(0px) rotate(0deg) scale(0.8);
+        opacity: 1;
+      }
+      25% {
+        transform: translateX(-20px) translateY(25vh) rotate(90deg) scale(1);
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateX(20px) translateY(50vh) rotate(180deg) scale(0.95);
+        opacity: 0.7;
+      }
+      75% {
+        transform: translateX(-15px) translateY(75vh) rotate(270deg) scale(1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateX(0px) translateY(100vh) rotate(360deg) scale(0.8);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.6s ease-out forwards;
+    }
+
+  </style>
+</head>
+<body class="min-h-screen {{ theme_colors.background_overlay or 'bg-black' }}"
+      style="background-image: url('{{ background_image }}'); background-size: cover; background-position: center;">
+
+  {% if is_legendary_theme and theme_value == "eclipse_bloom" %}
+  <div id="petal-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-10 overflow-hidden">
+  {% for i in range(30) %}
+    {% set left = range(0, 100)|random %}
+    {% set delay = range(0, 10)|random * 0.3 %}
+    {% set speed = range(10, 16)|random %}
+    <span class="petal" style="left: {{ left }}%; animation-delay: {{ delay }}s; animation-duration: {{ speed }}s;"></span>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="{{ theme_colors.card or 'bg-gray-800/70' }} backdrop-blur-lg p-8 z-20 relative rounded-2xl shadow-xl w-full max-w-5xl mx-auto mt-12 animate-fade-in">
+
+    <!-- Header Card -->
+    <div class="flex flex-col md:flex-row items-center md:justify-between {{ theme_colors.card or 'bg-gray-900/80' }} rounded-xl p-6 shadow-lg">
+      <div class="flex items-center space-x-6">
+        <img src="{{ avatar_image }}" alt="Avatar" class="w-28 h-28 rounded-full border-4 {{ theme_colors.border or 'border-indigo-500' }} shadow-md">
+        <div>
+          <h1 class="text-3xl font-bold">{{ profile.username }}</h1>
+          {% if title_display %}
+            {% set rarity_styles = {
+              'common': 'text-gray-300',
+              'rare': 'text-blue-300',
+              'epic': 'text-purple-300',
+              'legendary': 'text-yellow-300'
+            } %}
+            {% set rarity_class = rarity_styles.get(title_rarity, theme_colors.accent or 'text-gray-300') %}
+            {% set glow_class = {
+              'epic': 'glow-epic',
+              'legendary': 'glow-legendary'
+            }.get(title_rarity, '') %}
+            <p class="{{ rarity_class }} {{ glow_class }} font-medium text-sm italic mt-1">{{ title_display }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Equipped Badges -->
+      <div class="flex space-x-4 mt-6 md:mt-0 min-h-[3rem]">
+        {% if equipped_badges %}
+          {% for badge in equipped_badges %}
+            <img src="{{ badge.image }}" alt="{{ badge.label }}" title="{{ badge.label }}" class="w-12 h-12 rounded border {{ theme_colors.border or 'border-yellow-400' }} shadow-md">
+          {% endfor %}
+        {% else %}
+          <div class="flex items-center justify-center w-36 h-12 rounded border-2 border-dashed border-gray-500 text-gray-400 text-sm italic">
+            No badges equipped
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="my-8 border-gray-700" />
+
+    <!-- Stats -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold mb-4 {{ theme_colors.accent or 'text-yellow-300' }}">Stats</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm {{ theme_colors.text or 'text-white' }}">
+        <div class="{{ theme_colors.card or 'bg-gray-800' }} p-4 rounded shadow text-center">
+          <div class="text-lg font-bold">{{ profile.total_score }}</div>
+          <div class="text-gray-300">Total Score</div>
+        </div>
+        <div class="{{ theme_colors.card or 'bg-gray-800' }} p-4 rounded shadow text-center">
+          <div class="text-lg font-bold">{{ profile.streak }}</div>
+          <div class="text-gray-300">Daily Streak</div>
+        </div>
+        <div class="{{ theme_colors.card or 'bg-gray-800' }} p-4 rounded shadow text-center">
+          <div class="text-lg font-bold">{{ inventory|length }}</div>
+          <div class="text-gray-300">Items Owned</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory -->
+    <div>
+      <h2 class="text-xl font-bold mb-4 {{ theme_colors.accent or 'text-yellow-300' }}">Inventory</h2>
+      {% if inventory %}
+        <div id="inventory-wrapper" class="relative">
+          <div id="inventory-pages" class="overflow-hidden transition-all duration-300">
+            <div id="inventory-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {% for item in inventory %}
+                {% set rarity_border = {
+                  'common': 'hover:border-gray-400 hover:shadow-gray-500',
+                  'rare': 'hover:border-blue-400 hover:shadow-blue-500',
+                  'epic': 'hover:border-purple-500 hover:shadow-purple-600',
+                  'legendary': 'hover:border-yellow-400 hover:shadow-yellow-500'
+                }[item.rarity] if item.rarity else '' %}
+
+                <div class="{{ theme_colors.card or 'bg-gray-800' }} p-3 rounded-lg border-2 border-transparent transition-all duration-300 shadow hover:scale-105 {{ rarity_border }} flex flex-col items-center">
+                  <img src="{{ item.image }}" alt="{{ item.label }}" class="w-16 h-16 rounded mb-2">
+                  <div class="text-sm font-medium text-center">{{ item.label }}</div>
+                  {% if item.type in ["theme", "avatar", "badge", "title"] %}
+                    {% if item.type == 'badge' %}
+                      {% if item.value in profile.badges_equipped %}
+                        <div class="mt-1 text-green-400 text-xs font-semibold">Equipped</div>
+                      {% else %}
+                        <form method="POST" action="{{ url_for('equip_item') }}">
+                          <input type="hidden" name="type" value="badge">
+                          <input type="hidden" name="value" value="{{ item.value }}">
+                          <input type="hidden" name="referer" value="profile">
+                          <button class="mt-1 text-xs px-4 py-1 bg-slate-300 hover:bg-slate-200 text-black font-medium rounded transition">Equip</button>
+                        </form>
+                      {% endif %}
+                    {% elif profile[item.type] == item.value %}
+                      <div class="mt-1 text-green-400 text-xs font-semibold">Equipped</div>
+                    {% else %}
+                      <form method="POST" action="{{ url_for('equip_item') }}">
+                        <input type="hidden" name="type" value="{{ item.type }}">
+                        <input type="hidden" name="value" value="{{ item.value }}">
+                        <input type="hidden" name="referer" value="profile">
+                        <button class="mt-1 text-xs px-4 py-1 bg-slate-300 hover:bg-slate-200 text-black font-medium rounded transition">Equip</button>
+                      </form>
+                    {% endif %}
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <!-- Navigation Arrows -->
+          <button id="prev-page" class="hidden absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white px-2 py-1 rounded-l z-20">
+            ‹
+          </button>
+          <button id="next-page" class="hidden absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white px-2 py-1 rounded-r z-20">
+            ›
+          </button>
+        </div>
+      {% else %}
+        <p class="text-gray-400 italic">You don't own any items yet.</p>
+      {% endif %}
+    </div>
+
+    <p class="text-center mt-8 text-sm text-gray-400 italic">
+      Smogondle user since {{ profile.created_at | datetimeformat('%B %d, %Y') }}
+    </p>    
+
+    <!-- Controls -->
+    <div class="flex justify-between mt-8">
+      <a href="{{ url_for('edit_profile') }}" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold transition">Edit Profile</a>  
+      <a href="{{ url_for('game') }}" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold transition">Back to Game</a>
+    </div>
+
+  </div>
+{% if is_legendary_theme %}
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@3.0.1/tsparticles.bundle.min.js"></script>
+<script>
+  const themeParticles = {
+    eclipse_bloom: {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 150, density: { enable: true, area: 800 } },
+        color: { value: "#f9a8d4" },
+        shape: { type: "circle" },
+        opacity: {
+          value: 0.9,
+          random: { enable: true, minimumValue: 0.4 }
+        },
+        size: {
+          value: { min: 2, max: 6 },
+          random: true
+        },
+        move: {
+          enable: true,
+          speed: 1.5,
+          direction: "top",
+          straight: false,
+          outModes: { default: "out" },
+          trail: {
+            enable: true,
+            length: 5,
+            fillColor: "#000"
+          }
+        }
+      },
+      detectRetina: true
+    }
+  };
+
+  const activeTheme = {{ theme_value | tojson }};
+  tsParticles.load("profile-particles", themeParticles[activeTheme] || {});
+  console.log("Loading particles for:", activeTheme);
+</script>
+{% endif %}
+<script>
+  const itemsPerPage = 8;
+  const items = Array.from(document.querySelectorAll("#inventory-grid > div"));
+  const totalPages = Math.ceil(items.length / itemsPerPage);
+  let currentPage = 0;
+
+  const prevBtn = document.getElementById("prev-page");
+  const nextBtn = document.getElementById("next-page");
+  const inventoryWrapper = document.getElementById("inventory-wrapper");
+
+  function updatePage() {
+    items.forEach((item, index) => {
+      const show = index >= currentPage * itemsPerPage && index < (currentPage + 1) * itemsPerPage;
+      item.style.display = show ? "flex" : "none";
+    });
+    prevBtn.style.display = currentPage > 0 ? "block" : "none";
+    nextBtn.style.display = currentPage < totalPages - 1 ? "block" : "none";
+  }
+
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 0) {
+      currentPage--;
+      updatePage();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < totalPages - 1) {
+      currentPage++;
+      updatePage();
+    }
+  });
+
+  inventoryWrapper.addEventListener("mouseenter", () => {
+    if (totalPages > 1) {
+      prevBtn.style.display = currentPage > 0 ? "block" : "none";
+      nextBtn.style.display = currentPage < totalPages - 1 ? "block" : "none";
+    }
+  });
+
+  inventoryWrapper.addEventListener("mouseleave", () => {
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+  });
+
+  updatePage();  // Initialize view
+
+  let touchStartX = 0;
+let touchEndX = 0;
+
+inventoryWrapper.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+inventoryWrapper.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeDistance = touchStartX - touchEndX;
+  const threshold = 50; // Minimum distance to be considered a swipe
+
+  if (swipeDistance > threshold && currentPage < totalPages - 1) {
+    // Swipe left
+    currentPage++;
+    updatePage();
+  } else if (swipeDistance < -threshold && currentPage > 0) {
+    // Swipe right
+    currentPage--;
+    updatePage();
+  }
+}
+</script>
+</body>
+</html>

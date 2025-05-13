@@ -23,12 +23,21 @@
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <button type="submit" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded">Delete</button>
           </form>
-          <form method="POST" action="/update_points" class="inline-flex gap-2 items-center">
+          <form method="POST" action="/update_user_values" class="inline-flex flex-col sm:flex-row gap-2 items-start sm:items-center">
             <input type="hidden" name="user_id" value="{{ user.id }}">
-            <span class="text-gray-400 text-sm">Current: {{ user.score }}</span>
-            <input type="number" name="new_points" placeholder="Set points" class="w-24 px-2 py-1 rounded text-black">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">Update</button>
-          </form>          
+
+            <div>
+              <label class="block text-xs text-gray-400">Points:</label>
+              <input type="number" name="new_points" placeholder="{{ user.score }}" class="w-24 px-2 py-1 rounded text-black">
+            </div>
+
+            <div>
+              <label class="block text-xs text-gray-400">Pokédollars:</label>
+              <input type="number" name="new_pokedollars" placeholder="{{ user.pokedollars or 0 }}" class="w-24 px-2 py-1 rounded text-black">
+            </div>
+
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded mt-1 sm:mt-6">Update</button>
+          </form>     
         </td>
       </tr>
       {% endfor %}
