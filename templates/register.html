@@ -29,5 +29,36 @@
       <a href="/login" class="text-indigo-400 hover:underline">Log in</a>
     </p>
   </div>
+<script>
+  const profaneWords = [
+    "fuck", "shit", "bitch", "cunt", "nigger", "fag", "slut", "cock", "whore", "dick", "pussy", "rape",
+    "hitler", "nazi", "kike", "twat", "cum", "asshole", "mod", "admin"
+  ];
+
+  const usernameInput = document.getElementById("username");
+  const registerButton = document.querySelector("button[type='submit']");
+  const warningDiv = document.createElement("div");
+  warningDiv.className = "mt-2 text-sm text-red-400";
+  usernameInput.parentNode.appendChild(warningDiv);
+
+  function validateUsername() {
+    const username = usernameInput.value.toLowerCase();
+    const hasProfanity = profaneWords.some(word => username.includes(word));
+    const hasMaliciousChars = /[<>\"'%;(){}]|--/.test(username);
+
+    if (hasProfanity) {
+      warningDiv.textContent = "That username contains inappropriate language.";
+      registerButton.disabled = true;
+    } else if (hasMaliciousChars) {
+      warningDiv.textContent = "That username contains invalid characters.";
+      registerButton.disabled = true;
+    } else {
+      warningDiv.textContent = "";
+      registerButton.disabled = false;
+    }
+  }
+
+  usernameInput.addEventListener("input", validateUsername);
+</script>
 </body>
 </html>

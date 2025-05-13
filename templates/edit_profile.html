@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gradient-to-tr from-gray-900 via-purple-900 to-black text-white">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile | Smogondle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.6s ease-out forwards;
+    }
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xl animate-fade-in">
+    <h2 class="text-3xl font-bold mb-6 text-center">Edit Profile</h2>
+
+    <!-- Unified form: sends everything to update_badges -->
+    <form method="POST" action="{{ url_for('update_badges') }}">
+      <!-- Theme select -->
+      <div class="mb-6">
+        <label for="theme" class="block text-sm text-gray-300 mb-1">Theme</label>
+        <select name="theme" id="theme"
+          class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-indigo-500">
+          {% for item in themes %}
+            <option value="{{ item.value }}" {% if user.theme == item.value %}selected{% endif %}>
+              {{ item.label }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Avatar select -->
+      <div class="mb-6">
+        <label for="avatar" class="block text-sm text-gray-300 mb-1">Avatar</label>
+        <select name="avatar" id="avatar"
+          class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-indigo-500">
+          {% for item in avatars %}
+            <option value="{{ item.value }}" {% if user.avatar == item.value %}selected{% endif %}>
+              {{ item.label }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Title select -->
+      <div class="mb-6">
+        <label for="title" class="block text-sm text-gray-300 mb-1">Title</label>
+        <select name="title" id="title"
+          class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-indigo-500">
+          {% for item in titles %}
+            <option value="{{ item.value }}" {% if user.title == item.value %}selected{% endif %}>
+              {{ item.text }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Badge reorder UI -->
+      <div class="mb-6">
+        <label class="block text-sm text-gray-300 mb-1">Reorder Equipped Badges</label>
+        <ul id="badge-list" class="flex gap-4 mt-2">
+          {% for badge in badges if badge.value in user.badges_equipped %}
+          <li class="relative group cursor-move">
+            <input type="hidden" name="badges[]" value="{{ badge.value }}">
+            <img src="{{ badge.image }}" alt="{{ badge.label }}" title="{{ badge.label }}"
+                 class="w-12 h-12 rounded border border-yellow-400 shadow-md">
+            <button type="button" class="absolute top-0 right-0 text-xs text-white bg-red-600 rounded-full px-1 hidden group-hover:block"
+                    onclick="removeBadge(this)">✕</button>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Submit buttons -->
+      <div class="flex justify-between">
+        <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition">
+          Save Changes
+        </button>
+        <a href="{{ url_for('profile') }}" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold transition">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script>
+    function removeBadge(button) {
+      button.closest("li").remove();
+    }
+
+    new Sortable(document.getElementById('badge-list'), {
+      animation: 150,
+      ghostClass: 'opacity-50'
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+{% extends "base.html" %}
+
+{% block content %}
+<span class="hidden pulse-once"></span>
+<div class="min-h-screen flex items-center justify-center overflow-y-auto px-4 py-12 sm:px-8 md:px-16 text-white shop-page">
+  <div class="shop-card max-w-5xl w-full opacity-0 animate-fade-in">
+    <h2 class="text-3xl font-bold text-center mb-6 text-yellow-400">Item Shop</h2>
+    <div class="text-center text-sm text-gray-400 mb-10">
+      Use your <span class="text-yellow-300 font-semibold">{{ user.pokedollars }}</span> Pokédollars to unlock new customization options.
+    </div>
+
+    <div class="flex justify-center gap-6 mb-6">
+      <a href="{{ url_for('game') }}" class="hover-bounce inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-4 py-2 rounded">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Game
+      </a>
+
+      <a href="{{ url_for('profile') }}" class="hover-bounce inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-400 text-white font-semibold px-4 py-2 rounded">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.21 0 4.29.534 6.121 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        View Profile
+      </a>
+    </div>
+
+    <div class="flex justify-center mb-10">
+      <div id="wallet" class="flex items-center gap-3 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black px-6 py-3 rounded-full shadow-lg animate-bounce-slow">
+        <img src="{{ url_for('static', filename='icons/pokedollar_shop.png') }}" alt="Pokedollar" class="w-6 h-6 drop-shadow-sm">
+        <div class="text-lg font-bold tracking-wide">
+          {{ pokedollars }} Pokédollars
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex gap-4 mb-6 justify-center">
+      <button id="filter-all" onclick="filterItems('all')" class="filter-button bg-indigo-600 hover:bg-indigo-500 px-4 py-1 rounded text-sm">All</button>
+      <button id="filter-owned" onclick="filterItems('owned')" class="filter-button bg-green-600 hover:bg-green-500 px-4 py-1 rounded text-sm">Owned</button>
+      <button id="filter-equipped" onclick="filterItems('equipped')" class="filter-button bg-yellow-600 hover:bg-yellow-500 px-4 py-1 rounded text-sm">Equipped</button>
+    </div>
+
+    {% set rarity_colors = {
+      'common': 'border-gray-500 text-gray-300',
+      'rare': 'border-blue-400 text-blue-300',
+      'epic': 'border-purple-500 text-purple-300',
+      'legendary': 'border-yellow-400 text-yellow-300'
+    } %}
+
+    {% set grouped_items = {} %}
+    {% for item in shop_items %}
+      {% if not grouped_items[item.type] is defined %}
+        {% set _ = grouped_items.update({item.type: []}) %}
+      {% endif %}
+      {% set _ = grouped_items[item.type].append(item) %}
+    {% endfor %}
+
+    {% for category, items in grouped_items.items() %}
+    <div class="mt-8">
+      <h3 class="text-xl font-semibold text-yellow-300 mb-4 capitalize">{{ category }}s</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {% for item in items %}
+          {% set owned_flag = (item.type, item.value) in owned %}
+            {% if item.type == "badge" %}
+              {% set equipped_flag = item.value in equipped["badges"] %}
+            {% elif item.type == "title" %}
+              {% set equipped_flag = equipped["title"] == item.value %}
+            {% else %}
+              {% set equipped_flag = equipped[item.type] == item.value %}
+            {% endif %}
+          {% set rarity_class = rarity_colors.get(item.rarity, 'border-gray-600 text-gray-400') %}
+
+          <div class="relative shop-item p-4 rounded-lg shadow bg-gray-800 flex sm:flex-row sm:items-center sm:justify-between border-2 {{ rarity_class }} {% if insufficient_item == item.value %}animate-shake{% endif %}"
+              data-owned="{{ 'true' if owned_flag else 'false' }}"
+              data-equipped="{{ 'true' if equipped_flag else 'false' }}">
+
+            <!-- Thumbnail -->
+            {% if item.image %}
+              <img src="{{ item.image }}" alt="{{ item.label }}" class="w-12 h-12 rounded-lg border border-gray-600 mr-4">
+            {% endif %}
+
+            <!-- Text & Actions -->
+            <div class="flex-1">
+              <div class="text-lg font-bold text-white">
+                {{ item.label }}
+              </div>
+              {% if item.type == "theme" %}
+                <div class="text-sm mt-1">
+                  <button onclick="previewTheme('{{ item.value }}')" class="underline text-blue-300 hover:text-blue-400">
+                    Preview
+                  </button>
+                </div>
+              {% endif %}
+              <div class="text-sm text-gray-400">
+                {{ item.type|capitalize }} – <span class="text-yellow-300 font-semibold">{{ item.cost }} Pokédollars</span>
+              </div>
+              {% if item.rarity %}
+                <div class="text-xs mt-1 italic font-medium {{ rarity_class }}">{{ item.rarity|capitalize }} Item</div>
+              {% endif %}
+            </div>
+
+            <!-- Purchase / Equip Buttons -->
+            <div class="mt-3 sm:mt-0">
+              {% if owned_flag %}
+                {% if equipped_flag %}
+                  <span class="text-green-400 font-semibold">Equipped</span>
+                {% else %}
+                  <form method="post" action="{{ url_for('equip_item') }}">
+                    <input type="hidden" name="type" value="{{ item.type }}">
+                    <input type="hidden" name="value" value="{{ item.value }}">
+                    <button type="submit" class="bg-slate-300 hover:bg-slate-200 text-black font-medium px-4 py-1 rounded transition">Equip</button>
+                  </form>
+                {% endif %}
+              {% else %}
+                <form onsubmit="purchaseItem(event, '{{ item.type }}', '{{ item.value }}')">
+                  <button type="submit"
+                          class="relative overflow-hidden bg-yellow-500 hover:bg-yellow-400 text-black font-medium px-4 py-1 rounded transition"
+                          onclick="triggerRipple(event)">
+                    Buy
+                  </button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<!-- Theme Preview Modal -->
+<div id="theme-preview-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
+  <div id="theme-preview" class="max-w-4xl w-full rounded-lg shadow-xl p-6 text-white relative">
+    <button onclick="closeThemePreview()" class="absolute top-2 right-4 text-xl text-white hover:text-red-400">×</button>
+    <h2 class="text-2xl font-bold mb-4">Theme Preview</h2>
+    <div id="theme-preview-demo" class="rounded-lg p-6">
+      <h3 class="text-xl font-semibold mb-2">This is a sample profile card</h3>
+      <p class="text-sm">Theme colors, card styling, and text color are shown here.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+    function filterItems(mode) {
+      const items = document.querySelectorAll('.shop-item');
+      items.forEach(div => {
+        const owned = div.dataset.owned === "true";
+        const equipped = div.dataset.equipped === "true";
+        if (mode === "all") {
+          div.style.display = "flex";
+        } else if (mode === "owned") {
+          div.style.display = owned ? "flex" : "none";
+        } else if (mode === "equipped") {
+          div.style.display = equipped ? "flex" : "none";
+        }
+      });
+    
+      // Update button active state
+      document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('filter-button-active'));
+      document.getElementById('filter-' + mode).classList.add('filter-button-active');
+    }
+</script>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+      filterItems('all');
+    });
+</script>
+<script>
+  const THEME_DEFS = {
+    {% for item in shop_items if item.type == 'theme' %}
+      "{{ item.value }}": {
+        background: "{{ item.image }}",
+        card: "{{ item.colors.card }}",
+        text: "{{ item.colors.text }}",
+        accent: "{{ item.colors.accent }}",
+        border: "{{ item.colors.border }}",
+        overlay: "{{ item.colors.background_overlay }}"
+      },
+    {% endfor %}
+  };
+
+  function previewTheme(value) {
+    const theme = THEME_DEFS[value];
+    if (!theme) return;
+
+    const overlay = document.getElementById("theme-preview-overlay");
+    const demo = document.getElementById("theme-preview-demo");
+
+    document.body.style.backgroundImage = `url('${theme.background}')`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+
+    demo.className = `rounded-lg p-6 ${theme.card} ${theme.text}`;
+    overlay.classList.remove("hidden");
+  }
+
+  function closeThemePreview() {
+    const overlay = document.getElementById("theme-preview-overlay");
+    overlay.classList.add("hidden");
+    document.body.style.backgroundImage = '';
+    document.body.style.backgroundColor = 'black';
+  }
+</script>
+<style>
+
+    body.shop-page {
+      background-image: url("{{ url_for('static', filename='shop_background.png') }}");
+      background-size: 800px 800px;
+      animation: scroll-diagonal 120s linear infinite;
+      background-repeat: repeat;
+    }
+
+    @keyframes scroll-diagonal {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 1000px -1000px;
+      }
+    }
+
+    .shop-card {
+      position: relative;
+      background-color: #111827; /* solid navy blue */
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .shop-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 1rem;
+      padding: 4px;
+      background: linear-gradient(135deg, #ffd700, #ffffff, #ffd700);
+      background-size: 300% 300%;
+      animation: shimmer-border 5s linear infinite;
+      z-index: -1;
+      mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude; 
+      -webkit-mask-composite: destination-out;
+    }
+
+    @keyframes shimmer-border {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes fadeOut {
+      0%   { opacity: 1; }
+      60%  { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-10px); }
+    }
+    .animate-fade-out {
+      animation: fadeOut 2.5s ease-out forwards;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .animate-shake {
+      animation: shake 0.6s ease-in-out;
+    }
+
+    .filter-button-active {
+        outline: 2px solid white;
+        outline-offset: 2px;
+        font-weight: 600;
+        opacity: 1 !important;
+    }
+
+    @keyframes bounce-on-hover {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+    .hover-bounce:hover {
+      animation: bounce-on-hover 0.4s ease-in-out;
+    }
+
+    @keyframes bounceSlow {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-3px); }
+    }
+    .animate-bounce-slow {
+      animation: bounceSlow 2s infinite;
+    }
+
+    @keyframes pulseOnce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+    .pulse-once {
+      animation: pulseOnce 0.6s ease-in-out;
+    }
+
+    .buy-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      width: 100px;
+      height: 100px;
+      transform: scale(0);
+      animation: ripple 0.6s ease-out;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.6s ease-out forwards;
+    }
+</style>
+<script>
+  function triggerRipple(e) {
+    const button = e.currentTarget;
+    const ripple = document.createElement("span");
+    ripple.classList.add("buy-ripple");
+    ripple.style.left = `${e.offsetX - 50}px`;
+    ripple.style.top = `${e.offsetY - 50}px`;
+    button.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+</script>
+{% if pokedollar_flash %}
+<script>
+  const wallet = document.getElementById("wallet");
+  if (wallet) {
+    wallet.classList.remove("pulse-once");
+    void wallet.offsetWidth;
+    wallet.classList.add("pulse-once");
+  }
+</script>
+{% endif %}
+<script>
+  function purchaseItem(e, type, value) {
+    e.preventDefault();
+
+    fetch("/purchase_ajax", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token() if csrf_token else '' }}"
+      },
+      body: JSON.stringify({ type, value })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "ok") {
+        animateWallet();
+        // Optionally refresh that item’s button to show “Equipped” or “Owned”
+        setTimeout(() => window.location.reload(), 800);
+      } else if (data.status === "error") {
+        alert(data.message || "Purchase failed.");
+      }
+    });
+  }
+
+  function animateWallet() {
+    const wallet = document.getElementById("wallet");
+    if (wallet) {
+      wallet.classList.remove("pulse-once");
+      void wallet.offsetWidth;
+      wallet.classList.add("pulse-once");
+    }
+  }
+</script>
+{% endblock %}
